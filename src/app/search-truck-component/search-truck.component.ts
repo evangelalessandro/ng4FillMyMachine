@@ -1,5 +1,4 @@
-declare var google: any;
-
+ 
 import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import {
   FormsModule,
@@ -25,12 +24,10 @@ export class SearchTruckComponent implements OnInit {
 
   ngOnInit() {
 
-    
-     for (let i = 0; i < 15; i++) {
-    
+   //data da oggi a + 21 giorni 
+     for (let i = 0; i <= 21; i++) {
       var someDate = new Date();
-      
-      someDate.setDate(someDate.getDate() + 1);
+      someDate.setDate(someDate.getDate() + i);
       var testoData = "";
       if (i == 0) {
         testoData = "Oggi";
@@ -41,7 +38,7 @@ export class SearchTruckComponent implements OnInit {
       else if (i > 1) {
         testoData = "";
       }  
-      this.dateDisponibili.push((testoData).(someDate.toLocaleDateString()));
+      this.dateDisponibili.push(((testoData) + " " + (someDate.toLocaleDateString()).trim()));
     }
   }
 
@@ -49,7 +46,7 @@ export class SearchTruckComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       console.log("Form Submitted!");
-      this.form.reset();
+      
     }
   }
 
