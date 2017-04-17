@@ -1,0 +1,84 @@
+
+<div>
+<form novalidate
+      (ngSubmit)="onSubmit()"
+      #f="ngForm">
+	<fieldset ngModelGroup="name">
+		<div class="form-group"
+		     [ngClass]="{
+        'has-danger': source.invalid && (source.dirty || source.touched),
+        'has-success': source.valid && (source.dirty || source.touched)
+   }">
+			<label>Partenza</label>
+			<input type="text"
+			       class="form-control"
+			       name="source"
+			       [(ngModel)]="model.source"
+			       required
+			       #source="ngModel">
+			<div class="form-control-feedback"
+			     *ngIf="source.errors && (source.dirty || source.touched)">
+				<p *ngIf="source.errors.required">First name is required</p>
+			</div>
+		</div>
+
+		<div class="form-group"
+		     [ngClass]="{
+        'has-danger': arrivo.invalid && (arrivo.dirty || arrivo.touched),
+        'has-success': arrivo.valid && (arrivo.dirty || arrivo.touched)
+   }">
+			<label>Arrivo</label>
+			<input type="text"
+			       class="form-control"
+			       name="arrivo"
+			       [(ngModel)]="model.arrivo"
+			       required
+			       #arrivo="ngModel">
+			<div class="form-control-feedback"
+			     *ngIf="arrivo.errors && (arrivo.dirty || arrivo.touched)">
+				<p *ngIf="arrivo.errors.required">La città di arrivo è richiesta</p>
+			</div>
+		</div>
+	</fieldset>
+
+
+	<div class="form-group"
+	     [ngClass]="{
+        'has-danger': dataPartenza.invalid && (dataPartenza.dirty || dataPartenza.touched),
+        'has-success': dataPartenza.valid && (dataPartenza.dirty || dataPartenza.touched)
+   }">
+		<label>dataPartenza</label>
+		<input type="dataPartenza"
+		       class="form-control"
+		       name="dataPartenza"
+		       [(ngModel)]="model.dataPartenza"
+		       required
+		       
+		       #dataPartenza="ngModel">
+		<div class="form-control-feedback"
+		     *ngIf="dataPartenza.errors && (dataPartenza.dirty || dataPartenza.touched)">
+			<p *ngIf="dataPartenza.errors.required">dataPartenza is required</p>
+			<p *ngIf="dataPartenza.errors.pattern">dataPartenza must contain at least the @ character</p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label>Data Partenza</label>
+		<select class="form-control"
+		        name="dataPartenza"
+		        [(ngModel)]="model.dataPartenza">
+			<option value="">Seleziona la data</option>
+			<option *ngFor="let lang of dateDisponibili"
+			        [value]="lang">{{lang}}
+			</option>
+		</select>
+	</div>
+
+	 
+	<button type="submit"
+	        class="btn btn-primary"
+	        [disabled]="f.invalid">Submit
+	</button>
+    	<pre>{{f.value | json}}</pre>
+</form>  
+</div>
