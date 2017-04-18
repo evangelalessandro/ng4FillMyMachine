@@ -14,7 +14,8 @@ export class macchinasService {
     console.log('http service initialized');
 
   }
-
+  //link utile
+  ///http://restlet.com/company/blog/2016/04/08/interacting-efficiently-with-a-restful-service-with-angular2-and-rxjs-part-1/
   ///https://www.mockable.io/a/#/space/demo8429465/rest/UBIXgAAAA?inwizzard=true
   ///http://demo8429465.mockable.io/companies
   public get(): Observable<any> {
