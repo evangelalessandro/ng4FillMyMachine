@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
-import { SearchTruckComponent } from './search-truck-component/search-truck.component';
+import { SearchmacchinaComponent } from './search-macchina-component/search-macchina.component';
 import { CercaCaricoComponent } from './cerca-carico/cerca-carico.component';
 import { CompaniesService } from './Services/companies.service';
-import { TrucksService } from './Services/trucks.service';
+import { macchinasService } from './Services/macchinas.service';
 import { CompanyListComponent } from './company-list/company-list.component';
  
 @NgModule({
   declarations: [
     AppComponent,
-    SearchTruckComponent,
+    SearchmacchinaComponent,
     CercaCaricoComponent,
     CompanyListComponent
   ],
@@ -23,8 +23,8 @@ import { CompanyListComponent } from './company-list/company-list.component';
     HttpModule,
     RouterModule.forRoot([
       {
-        path: 'searchTruck',
-        component: SearchTruckComponent,
+        path: 'searchmacchina',
+        component: SearchmacchinaComponent,
       },
       {
         path: 'searchThings',
@@ -38,7 +38,7 @@ import { CompanyListComponent } from './company-list/company-list.component';
       
     ])
   ],
-  providers: [TrucksService, CompaniesService],
+  providers: [macchinasService, CompaniesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map'
 
 
 @Injectable()
-export class TrucksService {
+export class macchinasService {
    private   urlSiteApi = 'http://demo8429465.mockable.io';
 
   constructor(private http: Http) {

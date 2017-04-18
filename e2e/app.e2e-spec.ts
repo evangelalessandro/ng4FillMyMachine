@@ -1,10 +1,10 @@
-import { Ng4FillMyTruckPage } from './app.po';
+import { Ng4FillMymacchinaPage } from './app.po';
 
-describe('ng4-fill-my-truck App', () => {
-  let page: Ng4FillMyTruckPage;
+describe('ng4-fill-my-macchina App', () => {
+  let page: Ng4FillMymacchinaPage;
 
   beforeEach(() => {
-    page = new Ng4FillMyTruckPage();
+    page = new Ng4FillMymacchinaPage();
   });
 
   it('should display message saying app works', () => {

@@ -16,9 +16,9 @@ export class CompanyListComponent implements OnInit {
 
     _companiesService.getCompanies().forEach((value) => {
       console.log("prova");
-      var array= (value as Array<Companies>);
-      console.log(array);
-console.log("prova 2");
+      var comp=(<Companies>value).companies;
+      console.log(comp[0]);
+      this.companyList=comp;
     });
 
 
@@ -29,13 +29,23 @@ console.log("prova 2");
   }
 
 }
-export interface  Company {
+export class Company {
+   constructor(company:any) {
+    if (company) {
+      this.id = company.id;
+      this.name = company.name;
+      this.city = company.city;
+      
+      
+    }
+  }
   id: number;
   name: string;
   city?: string;
   date?: Date;
 }
 
-export interface Companies {
+export class Companies {
   companies: Company[];
+  numero: number;
 }

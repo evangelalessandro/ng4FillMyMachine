@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class Ng4FillMyTruckPage {
+export class Ng4FillMymacchinaPage {
   navigateTo() {
     return browser.get('/');
   }

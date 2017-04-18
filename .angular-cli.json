@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "ng4-fill-my-truck"
+    "name": "ng4-fill-my-macchina"
   },
   "apps": [
     {

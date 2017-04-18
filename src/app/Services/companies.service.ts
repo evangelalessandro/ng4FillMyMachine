@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Company } from '../company-list/company-list.component';
+
 import 'rxjs/add/operator/map'
 
 const urlSite = 'http://demo8429465.mockable.io';
@@ -8,34 +10,37 @@ const urlSite = 'http://demo8429465.mockable.io';
 
 @Injectable()
 export class CompaniesService {
-  constructor(private http: Http) {
-    console.log('http service initialized');
+    constructor(private http: Http) {
+        console.log('http service initialized');
 
-  }
-  ///https://www.mockable.io/a/#/space/demo8429465/rest/UBIXgAAAA?inwizzard=true
-  ///http://demo8429465.mockable.io/companies
-  public getCompanies(): Observable<any> {
+    }
+    ///https://www.mockable.io/a/#/space/demo8429465/rest/UBIXgAAAA?inwizzard=true
+    ///http://demo8429465.mockable.io/companies
+    public getCompanies(): Observable<any> {
 
-    /*{
-          "companies":
-            [
-              { "id": "1001", "name": "company A" },
-              { "id": "1002", "name": "company b" },
-              { "id": "1003", "name": "company c" },
-              { "id": "1004", "name": "company d" }
-            ]
-    }*/
+        /*{
+              "companies":
+                [
+                  { "id": "1001", "name": "company A" },
+                  { "id": "1002", "name": "company b" },
+                  { "id": "1003", "name": "company c" },
+                  { "id": "1004", "name": "company d" }
+                ]
+        }*/
 
-    let url = urlSite + '/companies';
+        let url = urlSite + '/companies';
+        console.log(url);
 
-    return this.http.get(url)
-      .map(response => { response.json()["companies"];  });
-  }
+        return this.http.get(url)
+            .map(response => {
+                return ((response.json()) );
+            });
+    }
 
-  public delete(id: string): Observable<Response> {
-    return this.http
-      .delete(`http://dbapi.io/db/coll/${id}`);
-  }
+    public delete(id: string): Observable<Response> {
+        return this.http
+            .delete(`http://dbapi.io/db/coll/${id}`);
+    }
 }
 
 /*

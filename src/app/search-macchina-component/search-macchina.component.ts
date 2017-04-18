@@ -9,14 +9,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'search-truck',
-  templateUrl: './search-truck.component.html',
-  styleUrls: ['./search-truck.component.css']
+  selector: 'search-macchina',
+  templateUrl: './search-macchina.component.html',
+  styleUrls: ['./search-macchina.component.css']
 })
 
-export class SearchTruckComponent implements OnInit {
+export class SearchmacchinaComponent implements OnInit {
 
-  model: searchTruck = new searchTruck();
+  model: searchmacchina = new searchmacchina();
   @ViewChild('f') form: any;
   dateDisponibili: string[] = [];
   constructor() {
@@ -52,7 +52,7 @@ export class SearchTruckComponent implements OnInit {
 
 
 }
-class searchTruck {
+class searchmacchina {
   constructor(public source: string = '',
     public destination: string = '',
     public date: Date = new Date(),
