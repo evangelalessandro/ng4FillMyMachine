@@ -1,0 +1,35 @@
+  
+<form class="form-inline well">
+  <div class="row">
+  <label for="IdName" class="col-lg-1 col-form-label-lg">Name</label>
+  <div class="form-group col-lg-3">
+    <input type="text" id="IdName" [(ngModel)]="title" name="Name" class="form-control" placeholder="Add Name...">
+  </div>
+  <label for="IdNote" class="col-lg-2 col-form-label-lg">Note</label>
+  <div class="form-group col-lg-4">
+    <input type="textarea" id="IdNote" [(ngModel)]="note" name="Note" class="form-control" placeholder="Note...">
+  </div>
+
+  <div class="form-group col-lg-1" >
+    <input type="button" (click)="add($event)" value="Aggiungi" class="btn btn-success">
+  </div>
+  </div>
+</form>
+
+<div class="well Company-list">
+  <div *ngFor="let company of companies">
+    <div class="col-md-1">
+      <input type="checkbox" [checked]="company.name" (click)="updateCompany(company)">
+    </div>
+    <div class="col-md-3">
+      {{company.title}}
+    </div>
+    <div class="col-md-4">
+      <input type="text" value={{company.note}} (click)="updateCompany(company)">
+    </div>
+    <div class="col-md-4">
+      <input type="button" (click)="deleteCompany(company._id)" value="Delete" class="btn btn-danger">
+    </div>
+    <br><br>
+  </div>
+</div>

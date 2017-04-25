@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
-import { SearchmacchinaComponent } from './search-macchina-component/search-macchina.component';
-import { CercaCaricoComponent } from './cerca-carico/cerca-carico.component';
-import { CompaniesService } from './Services/companies.service';
+import { SearchmacchinaComponent } from './components/search-macchina-component/search-macchina.component';
+import { CercaCaricoComponent } from './components/cerca-carico/cerca-carico.component';
+import { CompanyService } from './Services/companies.service';
 import { macchinasService } from './Services/macchinas.service';
-import { CompanyListComponent } from './company-list/company-list.component';
+import { CompaniesComponent } from './components/companies/companies.component';
  
 @NgModule({
   declarations: [
     AppComponent,
     SearchmacchinaComponent,
     CercaCaricoComponent,
-    CompanyListComponent
+     CompaniesComponent
   ],
   imports: [
     BrowserModule,
@@ -30,15 +30,14 @@ import { CompanyListComponent } from './company-list/company-list.component';
         path: 'searchThings',
         component: CercaCaricoComponent,
       },
-
-      {
-        path: 'companylist',
-        component: CompanyListComponent,
+ 
+            {
+        path: 'companies',
+        component: CompaniesComponent,
       },
-      
     ])
   ],
-  providers: [macchinasService, CompaniesService],
+  providers: [macchinasService, CompanyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
