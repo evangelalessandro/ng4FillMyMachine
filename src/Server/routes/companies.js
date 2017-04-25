@@ -25,7 +25,10 @@ router.get('/company/:id', function(req, res, next){
 
 //Save company
 router.post('/company', function(req, res, next){
-    var company =  req.body;
+    var company = req.body;
+    if (!company.creationDate) {
+        company.creationDate = new Date().toLocaleString();
+    }    
     if(!company.name){
         res.status(400);
         res.json({
@@ -43,7 +46,7 @@ router.post('/company', function(req, res, next){
 
 // Delete company
 router.delete('/company/:id', function(req, res, next){
-    db.companies.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, company){
+    db.company.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, company){
         if(err){
             res.send(err);
         }
@@ -56,12 +59,9 @@ router.put('/company/:id', function(req, res, next){
     var company = req.body;
     var updcompany = {};
     
-    if(company.isDone){
-        updcompany.isDone = company.isDone;
-    }
-    
-    if(updcompany.title){
-        updcompany.title = company.title;
+     
+    if(updcompany.name){
+        updcompany.name = company.name;
     }
     
     if(!updcompany){
@@ -70,7 +70,7 @@ router.put('/company/:id', function(req, res, next){
             "error":"Bad Data"
         });
     } else {
-        db.companies.update({_id: mongojs.ObjectId(req.params.id)},updcompany, {}, function(err,company){
+        db.company.update({_id: mongojs.ObjectId(req.params.id)},updcompany, {}, function(err,company){
         if(err){
             res.send(err);
         }

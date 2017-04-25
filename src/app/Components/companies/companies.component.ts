@@ -36,6 +36,33 @@ export class CompaniesComponent implements OnInit {
                 this.note = '';
             });
     }
-    
 
+  delete(company) {
+      var companies = this.companies;
+      console.log("Pre delete company ", company._id);
+
+      this.companyService.delete(company._id).subscribe(data => {
+          console.log("Delete company post chiamata servizio ", data);
+
+          if (data.n == 1) {
+              for (var i = 0; i < companies.length; i++) {
+                  if (companies[i]._id == company._id) {
+                      companies.splice(i, 1);
+                  }
+              }
+          }
+      });
+  }
+
+  updateStatus(company) {
+      var _company = {
+          _id: company._id,
+          title: company.name,
+          
+      };
+
+      this.companyService.update(_company).subscribe(data => {
+          company.name = data.name;
+      });
+  }  
 }

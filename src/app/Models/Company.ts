@@ -5,5 +5,5 @@ export class Company{
     mobile1: string;
     mobile2: string;
     email: string;
-    
+    creationDate: Date;
 }

@@ -29,7 +29,8 @@ constructor(private http:Http){
             .map(res => res.json());
     }    
     delete(id){
-        return this.http.delete('/api/companies/'+id)
+    
+        return this.http.delete(this.serverApi + '/company/' + id)
             .map(res => res.json());
     }
     update(item){
