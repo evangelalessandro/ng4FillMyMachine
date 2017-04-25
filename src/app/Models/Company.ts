@@ -6,4 +6,6 @@ export class Company{
     mobile2: string;
     email: string;
     creationDate: Date;
+    updateDate: Date;
+    
 }

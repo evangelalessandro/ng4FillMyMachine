@@ -29,6 +29,9 @@ router.post('/company', function(req, res, next){
     if (!company.creationDate) {
         company.creationDate = new Date().toLocaleString();
     }    
+    company.updateDate = new Date().toLocaleString();
+
+
     if(!company.name){
         res.status(400);
         res.json({
@@ -62,8 +65,21 @@ router.put('/company/:id', function(req, res, next){
      
     if(updcompany.name){
         updcompany.name = company.name;
+    } 
+    if (updcompany.email) {
+        updcompany.email = company.email;
     }
-    
+    if (updcompany.mobile2) {
+        updcompany.mobile2 = company.mobile2;
+    }
+    if (updcompany.mobile1) {
+        updcompany.mobile1 = company.mobile1;
+    }
+    if (updcompany.note) {
+        updcompany.note = company.note;
+    }
+    updcompany.updateDate = new Date().toLocaleString();
+
     if(!updcompany){
         res.status(400);
         res.json({
