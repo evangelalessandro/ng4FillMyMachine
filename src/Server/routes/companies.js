@@ -60,22 +60,26 @@ router.delete('/company/:id', function(req, res, next){
 // Update company
 router.put('/company/:id', function(req, res, next){
     var company = req.body;
-    var updcompany = {};
-    
+    var updcompany = {
+      
+    };
+    console.log('Server update company faseA ' ,company);
      
-    if(updcompany.name){
+    if (company.name){
         updcompany.name = company.name;
+        console.log('update name ');
     } 
-    if (updcompany.email) {
+    if (company.email) {
         updcompany.email = company.email;
+        console.log('update email ');
     }
-    if (updcompany.mobile2) {
+    if (company.mobile2) {
         updcompany.mobile2 = company.mobile2;
     }
-    if (updcompany.mobile1) {
+    if (company.mobile1) {
         updcompany.mobile1 = company.mobile1;
     }
-    if (updcompany.note) {
+    if (company.note) {
         updcompany.note = company.note;
     }
     updcompany.updateDate = new Date().toLocaleString();
@@ -86,6 +90,8 @@ router.put('/company/:id', function(req, res, next){
             "error":"Bad Data"
         });
     } else {
+        console.log('Server update company faseB ', updcompany);
+
         db.company.update({_id: mongojs.ObjectId(req.params.id)},updcompany, {}, function(err,company){
         if(err){
             res.send(err);

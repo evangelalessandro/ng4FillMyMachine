@@ -54,15 +54,11 @@ export class CompaniesComponent implements OnInit {
       });
   }
 
-  updateStatus(company) {
-      var _company = {
-          _id: company._id,
-          title: company.name,
-          
-      };
-
-      this.companyService.update(_company).subscribe(data => {
-          company.name = data.name;
+  update(company) {
+      console.log("Pre update company ", this.companies);
+      this.companyService.update(company).subscribe(data => {
+          console.log("post update company ", data);
+          //company = data;
       });
   }  
 }

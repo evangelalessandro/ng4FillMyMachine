@@ -19,7 +19,7 @@
 <div class="container">
   <div class="row">
     <div *ngFor="let company of companies">
-      <div class="col-xs-3">
+      <div class="col-lg-3">
         <div class="project project-default">
           <div class="shape">
             <div class="shape-text">
@@ -36,9 +36,10 @@
             <input type="text" value={{company.mobile2}} placeholder="Mobile 2...">
             <input type="text" value={{company.email}} placeholder="Email...">
 
-            <input type="button" (click)="updateCompany(company)" value="Save" class="btn btn-primary btn-update btn-add-card">
-            <input type="button" (click)="delete(company)" value="Delete" class="btn btn-danger"> {{company.creationDate}}
-            {{company.updateDate}}
+            <input type="submit"  (click)="update(company)" value="Save" class="btn btn-primary btn-update btn-add-card">
+            <input type="button" (click)="delete(company)" value="Delete" class="btn btn-danger">
+             <p> Data creazione: {{company.creationDate}}</p>
+            <p> Data modifica:{{company.updateDate}} </p>
           </div>
         </div>
       </div>
