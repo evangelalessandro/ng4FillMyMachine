@@ -1,48 +1,82 @@
-<form class="form-inline well">
-  <div class="row">
-    <label for="IdName" class="col-lg-1 col-form-label-lg">Name</label>
-    <div class="form-group col-lg-3">
-      <input type="text" id="IdName" [(ngModel)]="title" name="Name" class="form-control" placeholder="Add Name...">
-    </div>
-    <label for="IdNote" class="col-lg-2 col-form-label-lg">Note</label>
-    <div class="form-group col-lg-4">
-      <input type="textarea" id="IdNote" [(ngModel)]="note" name="Note" class="form-control" placeholder="Note...">
-    </div>
-
-    <div class="form-group col-lg-1">
-      <input type="button" (click)="add($event)" value="Aggiungi" class="btn btn-success">
-    </div>
+<div class="container"  >
+  <div class="col-lg-12">
+    <h1>Company<a class="btn icon-btn btn-primary pull-right" (click)="addNew()" 
+    (click)="showNew = true">
+      <span class="glyphicon btn-glyphicon glyphicon-plus img-circle"></span>Aggiungi nuovo</a></h1>
+    <h1 > show = {{showNew}}</h1>
   </div>
-</form>
-
-<hr>
-<div class="container">
+  
+  <div *ngIf="showNew == true">
+    <companydetail [company]="selectedCompany"></companydetail>
+    
+  </div>
   <div class="row">
-    <div *ngFor="let company of companies">
-      <div class="col-lg-3">
-        <div class="project project-default">
-          <div class="shape">
-            <div class="shape-text">
-              {{company.name}}
+    <div *ngFor="let company of companies" [class.selected]="company === selectedCompany" 
+      (click)="showNew = false" (click)="onSelect(company)" >
+
+      <div class="col-md-4">
+
+        <div class="card-base">
+          <div class="card-icon">
+            <a href="#" title="Widgets" id="widgetCardIcon" class="imagecard">
+              <i class="material-icons">business</i></a>
+            <div class="card-data widgetCardData">
+              <div class="box-header">
+                <div class="header-item">
+                  <h3>{{company.name}}</h3>
+                </div>
+              </div>
+              <h2 class="box-title" style="color: cadetblue;">{{company.name}}</h2>
+              <div class="twPc-divStats">
+                <ul class="twPc-Arrange">
+
+                  <li class="twPc-ArrangeSizeFit">
+                       <span class="twPc-StatLabel twPc-block">Mobile 1</span>
+                      <span class="twPc-StatValue">{{company.mobile1}}</span>
+                    
+                  </li>
+                  <li class="twPc-ArrangeSizeFit">
+                    <span class="twPc-StatLabel twPc-block">Mobile 2</span>
+                    <span class="twPc-StatValue">{{company.mobile2}}</span>
+
+                  </li>
+                  <li class="twPc-ArrangeSizeFit">
+                    <span class="twPc-StatLabel twPc-block">Email</span>
+                    <span class="twPc-StatValue">{{company.email}}</span>
+                  </li>
+
+                </ul>
+                <ul class="twPc-Arrange">
+                  <li class="twPc-ArrangeSizeFit">
+                    <span class="twPc-StatLabel twPc-block">Note</span>
+                    <span class="twPc-StatValue">{{company.note}}</span>
+                  </li>
+                </ul>
+                <ul class="twPc-Arrange">
+                  <li class="twPc-ArrangeSizeFit">
+                    <span class="twPc-StatLabel twPc-block">Data creazione</span>
+                    <span class="twPc-StatValue">{{company.creationDate}}</span>
+                  </li>
+                  <li class="twPc-ArrangeSizeFit">
+                    <span class="twPc-StatLabel twPc-block">Data modifica</span>
+                    <span class="twPc-StatValue">{{company.updateDate}}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="project-content">
-            <h3 class="lead">
-              <i class="material-icons">business</i> {{company.name}}
-            </h3>
-            <input type="text" value={{company.name}}>
-            <input type="textarea" value={{company.note}} placeholder="Aggiungi note...">
-            <input type="text" value={{company.mobile1}} placeholder="Mobile 1...">
-            <input type="text" value={{company.mobile2}} placeholder="Mobile 2...">
-            <input type="text" value={{company.email}} placeholder="Email...">
+          <div class="space"></div>
 
-            <input type="submit"  (click)="update(company)" value="Save" class="btn btn-primary btn-update btn-add-card">
-            <input type="button" (click)="delete(company)" value="Delete" class="btn btn-danger">
-             <p> Data creazione: {{company.creationDate}}</p>
-            <p> Data modifica:{{company.updateDate}} </p>
-          </div>
         </div>
       </div>
     </div>
+  </div>
+  <h2>
+    <span>Log {{logMessage}} </span>
+  </h2>
+  <hr>
+  <div *ngIf="showNew == false">
+    Modifica company:
+    <companydetail [company]="selectedCompany"></companydetail>
   </div>
 </div>

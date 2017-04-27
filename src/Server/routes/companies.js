@@ -30,7 +30,7 @@ router.post('/company', function(req, res, next){
         company.creationDate = new Date().toLocaleString();
     }    
     company.updateDate = new Date().toLocaleString();
-
+    console.log(company);
 
     if(!company.name){
         res.status(400);

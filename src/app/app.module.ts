@@ -9,13 +9,15 @@ import { CercaCaricoComponent } from './components/cerca-carico/cerca-carico.com
 import { CompanyService } from './Services/companies.service';
 import { macchinasService } from './Services/macchinas.service';
 import { CompaniesComponent } from './components/companies/companies.component';
+import { CompanyDetail } from './components/companies/companyDetail/companyDetail.component';
  
 @NgModule({
   declarations: [
     AppComponent,
     SearchmacchinaComponent,
     CercaCaricoComponent,
-     CompaniesComponent
+    CompaniesComponent,
+    CompanyDetail
   ],
   imports: [
     BrowserModule,
