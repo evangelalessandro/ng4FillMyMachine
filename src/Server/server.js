@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var tasks = require('./routes/tasks');
 var companies = require('./routes/companies');
+var carichi = require('./routes/carichi');
 
 var port = 3000;
 
@@ -23,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/', index);
-app.use('/api', [tasks, companies]);
+app.use('/api', [tasks, companies, carichi]);
 
 
 /*// Add headers

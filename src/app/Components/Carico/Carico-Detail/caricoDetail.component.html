@@ -1,0 +1,61 @@
+<div *ngIf="carico">
+    <form class="well">
+        <div class="form-group row">
+            <label for="IdName" class="col-lg-2 col-form-label">Name</label>
+            <div class="form-group col-lg-3">
+                <input type="text" id="IdName" [(ngModel)]="carico.name" name="name" class="form-control" placeholder="Add Name...">
+            </div>
+            <label for="InputEmail" class="col-lg-2 col-form-label">Email</label>
+            <div class="form-group col-lg-3">
+                <input type="text" id="InputEmail" [(ngModel)]="carico.email" name="email" class="form-control" placeholder="Add Email...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="IdNote" class="col-lg-2 col-form-label-lg">Note</label>
+            <div class="form-group col-lg-4">
+                <input type="textarea" id="IdNote" [(ngModel)]="carico.note" name="note" class="form-control" placeholder="Note...">
+            </div>
+        </div>
+        div class="form-group row">
+        <label for="IdMobile1" class="col-lg-2 col-form-label-lg">Mobile 1</label>
+        <div class="form-group col-lg-4">
+            <input type="text" id="IdMobile1" [(ngModel)]="company.mobile1" name="mobile1" class="form-control" placeholder="Mobile 1...">
+        </div>
+
+        <div class="form-group row">
+            <label for="cittasorgente" class="col-lg-2 col-form-label">Città di carico</label>
+            <div class="form-group col-lg-3">
+                <input type="text" id="cittasorgente" [(ngModel)]="company.citySource" name="citySource" class="form-control" placeholder="Città di carico...">
+            </div>
+            <label for="nationsorgente" class="col-lg-2 col-form-label">Nazione di carico</label>
+            <div class="form-group col-lg-3">
+                <input type="text" id="nationsorgente" [(ngModel)]="company.nationSource" name="nationSource" class="form-control" placeholder="Nazione di carico...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="cityDest" class="col-lg-2 col-form-label">Città di scarico</label>
+            <div class="form-group col-lg-3">
+                <input type="text" id="cittaDestinazione" [(ngModel)]="company.cityDest" name="cityDest" class="form-control" placeholder="Città di scarico...">
+            </div>
+            <label for="nationDest" class="col-lg-2 col-form-label">Nazione di scarico</label>
+            <div class="form-group col-lg-3">
+                <input type="text" id="nationDest" [(ngModel)]="company.nationDest" name="nationDest" class="form-control" placeholder="Nazione di scarico...">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="idcompany">Company</label>
+            <select class="form-control" name="idcompany" required #idcompany="ngModel" [(ngModel)]="carico.idcompany">
+				<option value="">Seleziona la compagnia</option>
+				<option *ngFor="let data of companylist"
+						[value]="data.name">{{data.name}}
+				</option>
+			</select>
+
+            <div class="form-group col-lg-1">
+                <input type="button" (click)="save()" value="Save" class="btn btn-success">
+            </div>
+        </div>
+    </form>
+    <hr>
+    <h1> {{logMessage}}</h1>
+</div>

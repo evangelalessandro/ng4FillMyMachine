@@ -23,14 +23,14 @@ router.get('/company/:id', function(req, res, next){
     });
 });
 
-//Save company
+//insert company
 router.post('/company', function(req, res, next){
     var company = req.body;
     if (!company.creationDate) {
         company.creationDate = new Date().toLocaleString();
     }    
     company.updateDate = new Date().toLocaleString();
-    console.log(company);
+    console.log("post company " + JSON.stringify( company));
 
     if(!company.name){
         res.status(400);
@@ -42,6 +42,8 @@ router.post('/company', function(req, res, next){
             if(err){
                 res.send(err);
             }
+            console.log("risposta " + JSON.stringify( company));
+
             res.json(company);
         });
     }
@@ -64,7 +66,10 @@ router.put('/company/:id', function(req, res, next){
       
     };
     console.log('Server update company faseA ' ,company);
-     
+    
+    if (company.creationDate) {
+        updcompany.creationDate = company.creationDate;
+    }
     if (company.name){
         updcompany.name = company.name;
         console.log('update name ');
@@ -95,8 +100,11 @@ router.put('/company/:id', function(req, res, next){
         db.company.update({_id: mongojs.ObjectId(req.params.id)},updcompany, {}, function(err,company){
         if(err){
             res.send(err);
-        }
-        res.json(company);
+            }
+        console.log('Server update company faseC ', updcompany);
+        updcompany._id = req.params.id;
+
+        res.json(updcompany);
     });
     }
 });

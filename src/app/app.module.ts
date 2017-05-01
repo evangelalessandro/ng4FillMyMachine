@@ -8,6 +8,12 @@ import { SearchmacchinaComponent } from './components/search-macchina-component/
 import { CercaCaricoComponent } from './components/cerca-carico/cerca-carico.component';
 import { CompanyService } from './Services/companies.service';
 import { macchinasService } from './Services/macchinas.service';
+import { carichiService} from './Services/carichi.service';
+
+import { CarichiComponent} from './components/carico/carichi.component';
+import { caricoDetail } from './components/carico/Carico-Detail/caricoDetail.component';
+
+
 import { CompaniesComponent } from './components/companies/companies.component';
 import { CompanyDetail } from './components/companies/companyDetail/companyDetail.component';
  
@@ -16,8 +22,12 @@ import { CompanyDetail } from './components/companies/companyDetail/companyDetai
     AppComponent,
     SearchmacchinaComponent,
     CercaCaricoComponent,
+
     CompaniesComponent,
-    CompanyDetail
+    CompanyDetail,
+
+    CarichiComponent,
+    caricoDetail
   ],
   imports: [
     BrowserModule,
@@ -37,9 +47,14 @@ import { CompanyDetail } from './components/companies/companyDetail/companyDetai
         path: 'companies',
         component: CompaniesComponent,
       },
+      
+      {
+        path: 'carichi',
+        component: CarichiComponent,
+      },      
     ])
   ],
-  providers: [macchinasService, CompanyService],
+  providers: [macchinasService, CompanyService, carichiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
