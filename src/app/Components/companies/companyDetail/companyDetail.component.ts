@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { Company } from '../../../Models/Company';
 import { CompanyService } from '../../../Services/companies.service';
 import { ReflectiveInjector } from '@angular/core';
@@ -13,13 +13,24 @@ import { OpaqueToken } from '@angular/core';
 })
 export class CompanyDetail implements OnInit {
     @Input() company: Company;
-    @Input() companies: Company[];
+
+    //eventi di creazione modifica e annullamento
+    ////
+    ///http://plnkr.co/edit/v3vmZkOK4fxDXsrziqHx?p=preview
+    @Output() companyCreated = new EventEmitter<Company>();
+    @Output() companyUpdated = new EventEmitter<Company>();
+    @Output() undoSelect = new EventEmitter();
 
     logMessage: string;
 
     constructor(private companyService: CompanyService) { }
 
     ngOnInit() { }
+
+    annulla()
+    {
+        this.undoSelect.emit();
+    }
 
     save() {
         if (this.company._id) {
@@ -28,6 +39,9 @@ export class CompanyDetail implements OnInit {
             this.companyService.update(this.company).subscribe(data => {
                 this.logMessage="post update company " + JSON.stringify( data);
                 this.company.updateDate = data.updateDate;
+
+                this.companyUpdated.emit(this.company);
+                
             });
         }
         else {
@@ -40,18 +54,9 @@ export class CompanyDetail implements OnInit {
 
         this.companyService.add(this.company)
             .subscribe(item => {
-                 
-
-                var i = 0;
-                this.companies.forEach(element => {
-                    if (!element._id)
-                    {
-                        this.companies.splice(i, 1);        
-                    }  
-                    i++;
-                });
-                this.companies.push(item);
                 this.company = item;
+
+                this.companyCreated.emit(item);
             });
     }
 }

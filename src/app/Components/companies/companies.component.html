@@ -29,7 +29,7 @@
                 <ul class="twPc-Arrange">
 
                   <li class="twPc-ArrangeSizeFit">
-                    <span class="twPc-StatLabel twPc-block">Mobile 1</span>
+                    <span class="twPc-StatLabel twPc-block">Mobile 1: </span>
                     <span class="twPc-StatValue">{{company.mobile1}}</span>
 
                   </li>
@@ -79,7 +79,7 @@
   <hr>
 
   <div id="compnew">
-    <companydetail [company]="selectedCompany"></companydetail>
+    <companydetail [company]="selectedCompany"  (undoSelect)="undoSelect()"  (companyCreated)="companyCreated($event)" ></companydetail>
 
   </div>
 

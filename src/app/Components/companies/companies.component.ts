@@ -30,6 +30,22 @@ export class CompaniesComponent implements OnInit {
         this.modeNew = false;
     }
 
+    updateCompany(company: Company)
+    { 
+    //    this.companies.unshift(company);
+        this.undoSelect();        
+    }
+    companyCreated(company: Company) {
+
+        this.companies.push(company);        
+       // this.companies.unshift(company);
+        this.undoSelect();
+    }
+    undoSelect()
+    { 
+        this.selectedCompany = null;
+        this.modeNew = false;
+    }
     addNew() {
 
         this.modeNew = true;
@@ -43,7 +59,7 @@ export class CompaniesComponent implements OnInit {
             }
         });
         this.selectedCompany = new Company();
-        this.companies.push(this.selectedCompany);
+       
 
     }
 

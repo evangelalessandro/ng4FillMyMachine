@@ -26,9 +26,12 @@
                 <input type="textarea" id="IdMobile2" [(ngModel)]="company.mobile2" name="mobile2" class="form-control" placeholder="Mobile 2...">
             </div>
             <div class="form-group col-lg-1">
-                <input type="button" (click)="save()" value="Save" class="btn btn-success">
+                <input type="button" (click)="save()" value="Salva" class="btn btn-success">
+            </div>
+            <div class="form-group col-lg-1">
+                <input type="button" (click)="annulla()" value="Annulla" class="btn btn-danger">
             </div>
         </div>
     </form>
-    <hr>{{log}}
+    <hr>{{logMessage}}
 </div>
