@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Directive, ElementRef, Input } from '@angular/core';
 import { Company } from '../../../Models/Company';
 import { CompanyService } from '../../../Services/companies.service';
+import { ReflectiveInjector } from '@angular/core';
+import { OpaqueToken } from '@angular/core';
+import { companiesLocalService } from './../companiesLocalService';
+
 @Component({
     selector: 'companydetail',
     templateUrl: './companyDetail.component.html',
@@ -36,7 +40,8 @@ export class CompanyDetail implements OnInit {
 
         this.companyService.add(this.company)
             .subscribe(item => {
-                
+                 
+
                 var i = 0;
                 this.companies.forEach(element => {
                     if (!element._id)

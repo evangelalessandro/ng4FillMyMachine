@@ -12,7 +12,7 @@ import { carichiService} from './Services/carichi.service';
 
 import { CarichiComponent} from './components/carico/carichi.component';
 import { caricoDetail } from './components/carico/Carico-Detail/caricoDetail.component';
-
+import { ScrollToModule } from 'ng2-scroll-to';
 
 import { CompaniesComponent } from './components/companies/companies.component';
 import { CompanyDetail } from './components/companies/companyDetail/companyDetail.component';
@@ -33,6 +33,7 @@ import { CompanyDetail } from './components/companies/companyDetail/companyDetai
     BrowserModule,
     FormsModule,
     HttpModule,
+    ScrollToModule.forRoot(),
     RouterModule.forRoot([
       {
         path: 'searchmacchina',

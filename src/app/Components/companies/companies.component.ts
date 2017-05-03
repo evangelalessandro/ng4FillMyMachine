@@ -1,6 +1,11 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Company } from '../../Models/Company';
 import { CompanyService } from '../../Services/companies.service';
+import { companiesLocalService } from './companiesLocalService';
+
+import { ReflectiveInjector } from '@angular/core';
+import { OpaqueToken } from '@angular/core';
+
 
 @Component({
     selector: 'app-companies',
@@ -8,13 +13,18 @@ import { CompanyService } from '../../Services/companies.service';
     styleUrls: ['./companies.component.css']
 })
 export class CompaniesComponent implements OnInit {
-     
+
     companies: Company[];
     logMessage: string;
-    modeNew : boolean;
+    modeNew: boolean;
     selectedCompany: Company;
-    
 
+    ScrollTop() {
+        var pagina = document.getElementById("top");
+        console.log(pagina.offsetTop);
+ 
+    }
+    
     ngOnInit() {
     }
 
@@ -24,12 +34,17 @@ export class CompaniesComponent implements OnInit {
                 this.companies = companies;
                 this.logMessage = JSON.stringify(companies);
 
+                const token = "companiesLocalService";
+
+                let injector = ReflectiveInjector.resolveAndCreate([{ provide: token, useClass: companiesLocalService }]);
+                let comp = injector.get(token);
+                comp.companies = companies;
             });
         this.modeNew = false;
     }
-     
+
     addNew() {
-        
+
         this.modeNew = true;
         this.logMessage = "log vuoto";
         var i = 0;
@@ -42,28 +57,28 @@ export class CompaniesComponent implements OnInit {
         });
         this.selectedCompany = new Company();
         this.companies.push(this.selectedCompany);
-        
+
     }
-     
+
     onSelect(company: Company): void {
         ///https://angular.io/docs/ts/latest/tutorial/toh-pt2.html esempio seleect element
         this.selectedCompany = company;
         this.logMessage = JSON.stringify(company);
-        
+
         this.modeNew = false;
     }
- /*   add(event) {
-        event.preventDefault();
-        var newCompany = new Company();
-
-        this.companyService.add(newCompany)
-            .subscribe(item => {
-                this.companies.push(item);
-
-            });
-        
-       
-    }*/
+    /*   add(event) {
+           event.preventDefault();
+           var newCompany = new Company();
+   
+           this.companyService.add(newCompany)
+               .subscribe(item => {
+                   this.companies.push(item);
+   
+               });
+           
+          
+       }*/
 
     delete(company) {
         var companies = this.companies;
