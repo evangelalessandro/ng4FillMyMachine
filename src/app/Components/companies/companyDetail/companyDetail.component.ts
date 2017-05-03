@@ -4,7 +4,7 @@ import { Company } from '../../../Models/Company';
 import { CompanyService } from '../../../Services/companies.service';
 import { ReflectiveInjector } from '@angular/core';
 import { OpaqueToken } from '@angular/core';
-import { companiesLocalService } from './../companiesLocalService';
+ 
 
 @Component({
     selector: 'companydetail',

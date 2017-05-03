@@ -16,10 +16,16 @@ import { ScrollToModule } from 'ng2-scroll-to';
 
 import { CompaniesComponent } from './components/companies/companies.component';
 import { CompanyDetail } from './components/companies/companyDetail/companyDetail.component';
+import {truncateTextPipe} from './Pipes/truncateText' 
  
+
+
 @NgModule({
   declarations: [
     AppComponent,
+    
+    truncateTextPipe,
+
     SearchmacchinaComponent,
     CercaCaricoComponent,
 
@@ -55,6 +61,7 @@ import { CompanyDetail } from './components/companies/companyDetail/companyDetai
       },      
     ])
   ],
+   
   providers: [macchinasService, CompanyService, carichiService],
   bootstrap: [AppComponent]
 })

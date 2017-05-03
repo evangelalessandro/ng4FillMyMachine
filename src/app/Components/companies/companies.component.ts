@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../../Models/Company';
 import { CompanyService } from '../../Services/companies.service';
-import { companiesLocalService } from './companiesLocalService';
-
-import { ReflectiveInjector } from '@angular/core';
-import { OpaqueToken } from '@angular/core';
-
+ 
 
 @Component({
     selector: 'app-companies',
     templateUrl: './companies.component.html',
-    styleUrls: ['./companies.component.css']
+    styleUrls: ['./companies.component.css'],
+     
 })
 export class CompaniesComponent implements OnInit {
 
@@ -18,12 +15,7 @@ export class CompaniesComponent implements OnInit {
     logMessage: string;
     modeNew: boolean;
     selectedCompany: Company;
-
-    ScrollTop() {
-        var pagina = document.getElementById("top");
-        console.log(pagina.offsetTop);
  
-    }
     
     ngOnInit() {
     }
@@ -33,12 +25,7 @@ export class CompaniesComponent implements OnInit {
             .subscribe(companies => {
                 this.companies = companies;
                 this.logMessage = JSON.stringify(companies);
-
-                const token = "companiesLocalService";
-
-                let injector = ReflectiveInjector.resolveAndCreate([{ provide: token, useClass: companiesLocalService }]);
-                let comp = injector.get(token);
-                comp.companies = companies;
+ 
             });
         this.modeNew = false;
     }
