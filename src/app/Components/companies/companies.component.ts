@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../../Models/Company';
 import { CompanyService } from '../../Services/companies.service';
- 
+
 
 @Component({
     selector: 'app-companies',
     templateUrl: './companies.component.html',
     styleUrls: ['./companies.component.css'],
-     
+
 })
 export class CompaniesComponent implements OnInit {
 
@@ -15,8 +15,8 @@ export class CompaniesComponent implements OnInit {
     logMessage: string;
     modeNew: boolean;
     selectedCompany: Company;
- 
-    
+    messageAlert: string;
+
     ngOnInit() {
     }
 
@@ -25,41 +25,42 @@ export class CompaniesComponent implements OnInit {
             .subscribe(companies => {
                 this.companies = companies;
                 this.logMessage = JSON.stringify(companies);
- 
+
             });
         this.modeNew = false;
     }
 
-    updateCompany(company: Company)
-    { 
-    //    this.companies.unshift(company);
-        this.undoSelect();        
-    }
-    companyCreated(company: Company) {
-
-        this.companies.push(company);        
-       // this.companies.unshift(company);
+    companyUpdated(company: Company) {
+        this.messageAlert = "update company";
         this.undoSelect();
     }
-    undoSelect()
-    { 
-        this.selectedCompany = null;
+
+    companyCreated(company: Company) {
+
+        this.companies.push(company);
+        // this.companies.unshift(company);
+        this.undoSelect();
+    }
+    undoSelect() {
+        this.selectedCompany = undefined;
         this.modeNew = false;
+
     }
     addNew() {
 
         this.modeNew = true;
         this.logMessage = "log vuoto";
         var i = 0;
-        this.companies.forEach(element => {
-            i++;
-            if (element._id) {
-                //ne aggiungo al massimo uno
-                this.companies.splice(i, 1);
-            }
-        });
+        /*        this.companies.forEach(element => {
+                    i++;
+                    if (element._id) {
+                        //ne aggiungo al massimo uno
+                        this.companies.splice(i, 1);
+                    }
+                });
+          */
         this.selectedCompany = new Company();
-       
+
 
     }
 
@@ -99,6 +100,4 @@ export class CompaniesComponent implements OnInit {
             }
         });
     }
-
-
 }
