@@ -20,9 +20,8 @@ body {
   background-color: #414EF9;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+   
+  
   align-items: center;
   padding: 1em 0;
 }
@@ -37,6 +36,8 @@ body {
 .box-header .header-item {
   margin: 0 1.2em;
   font-size: 16px;
+  text-align: center;
+  border: 2px;
   
 }
 .twPc-divStats {
@@ -49,8 +50,9 @@ body {
 .twPc-Arrange {
     box-sizing: border-box;
     display: table;
-    margin: 0;
+    margin: 10;
     min-width: 100%;
+    min-height: 100%;
     padding: 0;
     table-layout: auto;
 }
@@ -68,7 +70,7 @@ ul.twPc-Arrange {
     text-decoration: none;
 }
 .twPc-StatValue {
-    display: block;
+    display: inline-block;
     font-size: 18px;
     font-weight: 500;
     transition: color 0.15s ease-in-out 0s;
