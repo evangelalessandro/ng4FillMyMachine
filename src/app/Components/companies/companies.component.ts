@@ -92,7 +92,7 @@ export class CompaniesComponent implements OnInit {
 
                 this.toastyService.addToast(enTastyType.info, "Cancellazione", "Azienda cancellata")
 
-                console.log("Delete itempost chiamata servizio ", data);
+                console.log("Delete item post chiamata servizio ", data);
                 //se trovato rimuovo
                 if (data.n == 1) {
                     for (var i = 0; i < this.itemList.length; i++) {

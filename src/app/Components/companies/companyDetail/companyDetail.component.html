@@ -6,7 +6,7 @@
 
                 <input type="text" id="name" class="form-control"
                  required minlength="3" maxlength="50" forbiddenName="ass" 
-                 name="name" [(ngModel)]="item.name">
+                 name="name" [(ngModel)]="item.name" placeholder="Add Name...">
 
                 <div *ngIf="formErrors.name" class="alert alert-danger">
                     {{ formErrors.name }}

@@ -4,7 +4,7 @@ import { Company } from '../../../Models/Company';
 import { CompanyService } from '../../../Services/companies.service';
 import { ReflectiveInjector } from '@angular/core';
 import { OpaqueToken } from '@angular/core';
-import {  AfterViewChecked, ViewChild } from '@angular/core';
+import { AfterViewChecked, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -71,7 +71,7 @@ export class CompanyDetail implements OnInit {
     validationMessages = {
         'name': {
             'required': 'Name is required.',
-            'minlength': 'Name must be at least 4 characters long.',
+            'minlength': 'Name must be at least 3 characters long.',
             'maxlength': 'Name cannot be more than 50 characters long.',
             'forbiddenName': 'Some name cannot be a name of a company.'
         },
@@ -80,8 +80,7 @@ export class CompanyDetail implements OnInit {
             'pattern': 'Please input a valid email.'
         }
     };
-    annulla()
-    {
+    annulla() {
         this.undoSelect.emit();
     }
 
@@ -90,11 +89,11 @@ export class CompanyDetail implements OnInit {
             this.logMessage = JSON.stringify(this.item);
 
             this.companyService.update(this.item).subscribe(data => {
-                this.logMessage="post update item" + JSON.stringify( data);
+                this.logMessage = "post update item" + JSON.stringify(data);
                 this.item.updateDate = data.updateDate;
 
                 this.itemUpdated.emit(this.item);
-                
+
             });
         }
         else {
@@ -108,7 +107,7 @@ export class CompanyDetail implements OnInit {
         this.companyService.add(this.item)
             .subscribe(item => {
 
-                this.item= item;
+                this.item = item;
 
                 this.itemCreated.emit(item);
             });
