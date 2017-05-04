@@ -19,7 +19,8 @@ import { CompanyDetail } from './components/companies/companyDetail/companyDetai
 import { truncateTextPipe } from './Pipes/truncateText'
 import { ToastyModule } from 'ng2-toasty';
 import { ToastServiceUtils } from './Utils/ToastServiceUtils'
-
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { ConfirmComponent } from './Utils/confirm.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { ToastServiceUtils } from './Utils/ToastServiceUtils'
     CompaniesComponent,
     CompanyDetail,
     
-
+    ConfirmComponent,
     CarichiComponent,
     caricoDetail
   ],
@@ -44,7 +45,7 @@ import { ToastServiceUtils } from './Utils/ToastServiceUtils'
     ///per le message a cascata
     ///https://github.com/akserg/ng2-toasty
     ToastyModule.forRoot(),
- 
+    BootstrapModalModule,
 
     //per lo scroll
     ScrollToModule.forRoot(),
@@ -69,7 +70,10 @@ import { ToastServiceUtils } from './Utils/ToastServiceUtils'
       },
     ])
   ],
-
+  //Don't forget to add the component to entryComponents section
+  entryComponents: [
+    ConfirmComponent
+  ],
   providers: [macchinasService, CompanyService, carichiService, ToastServiceUtils ],
   bootstrap: [AppComponent]
 })
