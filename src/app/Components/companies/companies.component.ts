@@ -13,10 +13,10 @@ import { enTastyType } from '../../Utils/ToastServiceUtils';
 })
 export class CompaniesComponent implements OnInit {
 
-    companies: Company[];
+    itemList: Company[];
     logMessage: string;
 
-    selectedCompany: Company;
+    selectedItem: Company;
     messageAlert: string;
 
     ngOnInit() {
@@ -27,13 +27,13 @@ export class CompaniesComponent implements OnInit {
         private dialogService: DialogService) {
         this.companyService.getall()
             .subscribe(companies => {
-                this.companies = companies;
+                this.itemList = companies;
                 this.logMessage = JSON.stringify(companies);
 
             });
 
     }
-    companyUpdated(company: Company) {
+    itemUpdated(company: Company) {
 
         console.log("ToastServiceUtils " + this.toastyService);
         this.toastyService.addToast(enTastyType.success,
@@ -41,25 +41,25 @@ export class CompaniesComponent implements OnInit {
         this.undoSelect();
     }
 
-    companyCreated(company: Company) {
+    itemCreated(company: Company) {
         this.toastyService.addToast(enTastyType.success, "Salvataggio", "Azienda inserita")
 
-        this.companies.push(company);
+        this.itemList.push(company);
         // this.companies.unshift(company);
         this.undoSelect();
     }
     undoSelect() {
-        this.selectedCompany = undefined;
+        this.selectedItem = undefined;
     }
     addNew() {
         this.logMessage = "log vuoto";
-        this.selectedCompany = new Company();
+        this.selectedItem = new Company();
     }
 
-    onSelect(company: Company): void {
+    onSelect(item: Company): void {
         ///https://angular.io/docs/ts/latest/tutorial/toh-pt2.html esempio seleect element
-        this.selectedCompany = company;
-        this.logMessage = JSON.stringify(company);
+        this.selectedItem = item;
+        this.logMessage = JSON.stringify(item);
 
     }
     showConfirm(titleMsg: string, messageTxt: string, functToExecute) {
@@ -83,32 +83,34 @@ export class CompaniesComponent implements OnInit {
         }, 10000);
     }
 
-    delete(companyToDelete) {
+    delete(itemToDelete) {
 
-        let company = companyToDelete;
-        let comps = this.companies;
-        let compService = this.companyService;
-        let compTast = this.toastyService
-        var a = function deletecompany() {
+        let a = function deletecompany() {
+            console.log("Pre delete item", itemToDelete._id);
 
-            var companies = comps;
-            console.log("Pre delete company ", company._id);
+            this.companyService.delete(itemToDelete._id).subscribe(data => {
 
-            compService.delete(company._id).subscribe(data => {
+                this.toastyService.addToast(enTastyType.info, "Cancellazione", "Azienda cancellata")
 
-                compTast.addToast(enTastyType.info, "Cancellazione", "Azienda cancellata")
-
-                console.log("Delete company post chiamata servizio ", data);
+                console.log("Delete itempost chiamata servizio ", data);
                 //se trovato rimuovo
                 if (data.n == 1) {
-                    for (var i = 0; i < companies.length; i++) {
-                        if (companies[i]._id == company._id) {
-                            companies.splice(i, 1);
+                    for (var i = 0; i < this.itemList.length; i++) {
+                        if (this.itemList[i]._id == itemToDelete._id) {
+                            this.itemList.splice(i, 1);
                         }
                     }
                 }
+
             });
+            console.log(itemToDelete._id, this.selectedItem._id);
+            if (itemToDelete._id == this.selectedItem._id) {
+                /////se quello che si cancella è quello che è selezionato, 
+                /////viene rimosso il selezionato
+                this.undoSelect();
+            }
         }
-        this.showConfirm("Conferma", "Sei sicuro che vuoi cancellare?", a);
+
+        this.showConfirm("Conferma", "Sei sicuro che vuoi cancellare?", a.bind(this));
     }
 }

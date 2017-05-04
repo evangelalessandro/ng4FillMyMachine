@@ -1,6 +1,5 @@
 <ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div class="container">
-<button class="btn btn-default" (click)=showConfirm()>Show confirm</button>
   <div class="col-lg-12">
     <h1>Company
       <a class="btn icon-btn btn-primary pull-right" (click)="addNew()" scrollTo scrollTargetSelector="#compnew">
@@ -10,7 +9,7 @@
   </div>
   <div class="space"></div>
   <div class="row">
-    <div *ngFor="let company of companies" [class.selected]="company === selectedCompany">
+    <div *ngFor="let item of itemList" [class.selected]="item=== selectedItem">
 
       <div class="col-md-4">
 
@@ -21,7 +20,7 @@
             <div class="card-data widgetCardData">
               <div class="box-header">
                 <div class="header-item">
-                  <h3>{{company.name}}</h3>
+                  <h3>{{item.name}}</h3>
                 </div>
               </div>
               <div class="twPc-divStats">
@@ -29,36 +28,36 @@
 
                   <li class="twPc-ArrangeSizeFit">
                     <span class="twPc-StatLabel twPc-block">Mobile 1: </span>
-                    <span class="twPc-StatValue">{{company.mobile1}}</span>
+                    <span class="twPc-StatValue">{{item.mobile1}}</span>
 
                   </li>
                   <li class="twPc-ArrangeSizeFit">
                     <span class="twPc-StatLabel twPc-block">Mobile 2</span>
-                    <span class="twPc-StatValue">{{company.mobile2}}</span>
+                    <span class="twPc-StatValue">{{item.mobile2}}</span>
 
                   </li>
                 </ul>
                 <ul class="twPc-Arrange">
                   <li class="twPc-ArrangeSizeFit">
                     <span class="twPc-StatLabel twPc-block">Email</span>
-                    <span class="twPc-StatValue">{{company.email}}</span>
+                    <span class="twPc-StatValue">{{item.email}}</span>
                   </li>
 
                 </ul>
                 <ul class="twPc-Arrange">
                   <li class="twPc-ArrangeSizeFit">
                     <span class="twPc-StatLabel twPc-block">Note</span>
-                    <span class="twPc-StatValue">{{company.note | truncateText:'15'}} </span>
+                    <span class="twPc-StatValue">{{item.note | truncateText:'15'}} </span>
                   </li>
                 </ul>
                 <ul class="twPc-Arrange">
                   <li class="twPc-ArrangeSizeFit">
                     <span class="twPc-StatLabel twPc-block">Data creazione</span>
-                    <span class="twPc-StatValue">{{company.creationDate}}</span>
+                    <span class="twPc-StatValue">{{item.creationDate}}</span>
                   </li>
                   <li class="twPc-ArrangeSizeFit">
                     <span class="twPc-StatLabel twPc-block">Data modifica</span>
-                    <span class="twPc-StatValue">{{company.updateDate}}</span>
+                    <span class="twPc-StatValue">{{item.updateDate}}</span>
                   </li>
 
                 </ul>
@@ -66,11 +65,11 @@
                 <span>
                     <input type="button" scrollTo scrollTargetSelector="#compnew" 
                     value="Modifica" 
-                    (click)="onSelect(company)" 
+                    (click)="onSelect(item)" 
                     class="btn btn-success btn-rounded btn-lg">
                     
                     <input type="button" 
-                    (click)="delete(company)" 
+                    (click)="delete(item)" 
                     value="Cancella" 
                     class="btn btn-danger btn-rounded btn-lg">
                   </span>
@@ -85,14 +84,14 @@
   </div>
   <h2>
     <pre>
-      {{selectedCompany | json}}
+      {{selectedItem | json}}
     </pre>
     <span>Log {{logMessage }} </span>
   </h2>
   <hr>
   <div id="compnew">
-    <div *ngIf="selectedCompany">
-      <companydetail [company]="selectedCompany" (undoSelect)="undoSelect()" (companyCreated)="companyCreated($event)" (companyUpdated)="companyUpdated($event)"></companydetail>
+    <div *ngIf="selectedItem">
+      <companydetail [item]="selectedItem" (undoSelect)="undoSelect()" (itemCreated)="itemCreated($event)" (itemUpdated)="itemUpdated($event)"></companydetail>
     </div>
   </div>
 </div>

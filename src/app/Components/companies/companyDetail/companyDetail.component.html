@@ -1,32 +1,46 @@
-<div *ngIf="company">
-    <form class="well">
+<div *ngIf="item">
+    <form class="well" #heroForm="ngForm">
         <div class="form-group row">
             <label for="IdName" class="col-lg-2 col-form-label">Name</label>
             <div class="form-group col-lg-3">
-                <input type="text" id="IdName" [(ngModel)]="company.name" name="name" class="form-control" placeholder="Add Name...">
+
+                <input type="text" id="name" class="form-control"
+                 required minlength="3" maxlength="50" forbiddenName="ass" 
+                 name="name" [(ngModel)]="item.name">
+
+                <div *ngIf="formErrors.name" class="alert alert-danger">
+                    {{ formErrors.name }}
+                </div>
             </div>
             <label for="InputEmail" class="col-lg-2 col-form-label">Email</label>
             <div class="form-group col-lg-3">
-                <input type="text" id="InputEmail" [(ngModel)]="company.email" name="email" class="form-control" placeholder="Add Email...">
+                <input type="email" id="InputEmail" [(ngModel)]="item.email" 
+                    name="email" class="form-control" placeholder="Add Email..."
+                    required 
+                    pattern="^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$">
+                <div *ngIf="formErrors.email" class="alert alert-danger">
+                    {{ formErrors.email }}
+                </div>
             </div>
         </div>
         <div class="form-group row">
             <label for="IdNote" class="col-lg-2 col-form-label-lg">Note</label>
             <div class="form-group col-lg-4">
-                <input type="textarea" id="IdNote" [(ngModel)]="company.note" name="note" class="form-control" placeholder="Note...">
+                <textarea rows="3" id="IdNote" [(ngModel)]="item.note" name="note" class="form-control" placeholder="Note..."></textarea>
             </div>
         </div>
         <div class="form-group row">
             <label for="IdMobile1" class="col-lg-2 col-form-label-lg">Mobile 1</label>
             <div class="form-group col-lg-4">
-                <input type="textarea" id="IdMobile1" [(ngModel)]="company.mobile1" name="mobile1" class="form-control" placeholder="Mobile 1...">
+                <input type="textarea" id="IdMobile1" [(ngModel)]="item.mobile1" name="mobile1" class="form-control" placeholder="Mobile 1...">
             </div>
             <label for="IdMobile2" class="col-lg-2 col-form-label-lg">Mobile 2</label>
             <div class="form-group col-lg-4">
-                <input type="textarea" id="IdMobile2" [(ngModel)]="company.mobile2" name="mobile2" class="form-control" placeholder="Mobile 2...">
+                <input type="textarea" id="IdMobile2" [(ngModel)]="item.mobile2" name="mobile2" class="form-control" placeholder="Mobile 2...">
+
             </div>
             <div class="form-group col-lg-1">
-                <input type="button" (click)="save()" value="Salva" class="btn btn-success">
+                <input type="button" [disabled]="!heroForm.form.valid" (click)="save()" value="Salva" class="btn btn-success">
             </div>
             <div class="form-group col-lg-1">
                 <input type="button" (click)="annulla()" value="Annulla" class="btn btn-danger">
