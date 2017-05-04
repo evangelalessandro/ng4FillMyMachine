@@ -1,1 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*questo è per le message a schermo del compoennte ng2-tasty*/
+@import "style-bootstrap.css" 

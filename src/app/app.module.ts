@@ -8,22 +8,23 @@ import { SearchmacchinaComponent } from './components/search-macchina-component/
 import { CercaCaricoComponent } from './components/cerca-carico/cerca-carico.component';
 import { CompanyService } from './Services/companies.service';
 import { macchinasService } from './Services/macchinas.service';
-import { carichiService} from './Services/carichi.service';
+import { carichiService } from './Services/carichi.service';
 
-import { CarichiComponent} from './components/carico/carichi.component';
+import { CarichiComponent } from './components/carico/carichi.component';
 import { caricoDetail } from './components/carico/Carico-Detail/caricoDetail.component';
 import { ScrollToModule } from 'ng2-scroll-to';
 
 import { CompaniesComponent } from './components/companies/companies.component';
 import { CompanyDetail } from './components/companies/companyDetail/companyDetail.component';
-import {truncateTextPipe} from './Pipes/truncateText' 
- 
+import { truncateTextPipe } from './Pipes/truncateText'
+import { ToastyModule } from 'ng2-toasty';
+import { ToastServiceUtils } from './Utils/ToastServiceUtils'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+
     truncateTextPipe,
 
     SearchmacchinaComponent,
@@ -31,6 +32,7 @@ import {truncateTextPipe} from './Pipes/truncateText'
 
     CompaniesComponent,
     CompanyDetail,
+    
 
     CarichiComponent,
     caricoDetail
@@ -39,6 +41,12 @@ import {truncateTextPipe} from './Pipes/truncateText'
     BrowserModule,
     FormsModule,
     HttpModule,
+    ///per le message a cascata
+    ///https://github.com/akserg/ng2-toasty
+    ToastyModule.forRoot(),
+ 
+
+    //per lo scroll
     ScrollToModule.forRoot(),
     RouterModule.forRoot([
       {
@@ -49,20 +57,20 @@ import {truncateTextPipe} from './Pipes/truncateText'
         path: 'searchThings',
         component: CercaCaricoComponent,
       },
- 
-            {
+
+      {
         path: 'companies',
         component: CompaniesComponent,
       },
-      
+
       {
         path: 'carichi',
         component: CarichiComponent,
-      },      
+      },
     ])
   ],
-   
-  providers: [macchinasService, CompanyService, carichiService],
+
+  providers: [macchinasService, CompanyService, carichiService, ToastServiceUtils ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

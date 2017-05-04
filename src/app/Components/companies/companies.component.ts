@@ -1,41 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../../Models/Company';
 import { CompanyService } from '../../Services/companies.service';
+import { ToastServiceUtils } from '../../Utils/ToastServiceUtils';
 
+import { enTastyType } from '../../Utils/ToastServiceUtils';
 
 @Component({
     selector: 'app-companies',
     templateUrl: './companies.component.html',
-    styleUrls: ['./companies.component.css'],
-
+    styleUrls: ['./companies.component.css']
 })
 export class CompaniesComponent implements OnInit {
 
     companies: Company[];
     logMessage: string;
-    modeNew: boolean;
+   
     selectedCompany: Company;
     messageAlert: string;
 
     ngOnInit() {
     }
 
-    constructor(private companyService: CompanyService) {
+    constructor(private companyService: CompanyService,
+        private toastyService: ToastServiceUtils) {
         this.companyService.getall()
             .subscribe(companies => {
                 this.companies = companies;
                 this.logMessage = JSON.stringify(companies);
 
             });
-        this.modeNew = false;
+        
     }
 
+
+
     companyUpdated(company: Company) {
-        this.messageAlert = "update company";
+
+        console.log("ToastServiceUtils " + this.toastyService);   
+        this.toastyService.addToast(enTastyType.success,
+            "Success", "Azienda aggiornata", 5000);
         this.undoSelect();
     }
 
     companyCreated(company: Company) {
+
+        this.toastyService.addToast(enTastyType.success, "Salvataggio", "Azienda inserita")
 
         this.companies.push(company);
         // this.companies.unshift(company);
@@ -43,14 +52,13 @@ export class CompaniesComponent implements OnInit {
     }
     undoSelect() {
         this.selectedCompany = undefined;
-        this.modeNew = false;
+        
 
     }
     addNew() {
-
-        this.modeNew = true;
+ 
         this.logMessage = "log vuoto";
-        var i = 0;
+        //var i = 0;
         /*        this.companies.forEach(element => {
                     i++;
                     if (element._id) {
@@ -68,8 +76,7 @@ export class CompaniesComponent implements OnInit {
         ///https://angular.io/docs/ts/latest/tutorial/toh-pt2.html esempio seleect element
         this.selectedCompany = company;
         this.logMessage = JSON.stringify(company);
-
-        this.modeNew = false;
+ 
     }
     /*   add(event) {
            event.preventDefault();
@@ -89,6 +96,9 @@ export class CompaniesComponent implements OnInit {
         console.log("Pre delete company ", company._id);
 
         this.companyService.delete(company._id).subscribe(data => {
+
+            this.toastyService.addToast(enTastyType.info,"Cancellazione","Azienda cancellata")
+            
             console.log("Delete company post chiamata servizio ", data);
             //se trovato rimuovo
             if (data.n == 1) {

@@ -1,4 +1,6 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div class="container">
+
   <div class="col-lg-12">
     <h1>Company
       <a class="btn icon-btn btn-primary pull-right" (click)="addNew()" scrollTo scrollTargetSelector="#compnew">
@@ -6,7 +8,7 @@
     </h1>
 
   </div>
-   <div class="space"></div>
+  <div class="space"></div>
   <div class="row">
     <div *ngFor="let company of companies" [class.selected]="company === selectedCompany">
 
@@ -88,10 +90,9 @@
     <span>Log {{logMessage }} </span>
   </h2>
   <hr>
-
-  <div *ngIf="selectedCompany" id="compnew">
-    <companydetail [company]="selectedCompany" (undoSelect)="undoSelect()" (companyCreated)="companyCreated($event)" (companyUpdated)="companyUpdated($event)"></companydetail>
-
+  <div id="compnew">
+    <div *ngIf="selectedCompany">
+      <companydetail [company]="selectedCompany" (undoSelect)="undoSelect()" (companyCreated)="companyCreated($event)" (companyUpdated)="companyUpdated($event)"></companydetail>
+    </div>
   </div>
-
 </div>
