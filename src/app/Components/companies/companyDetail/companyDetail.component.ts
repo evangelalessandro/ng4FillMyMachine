@@ -7,62 +7,19 @@ import { OpaqueToken } from '@angular/core';
 import { AfterViewChecked, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+import { masterDetail_DetailComponent } from '../../Base/masterDetail_DetailComponent'
+
 @Component({
     selector: 'companydetail',
     templateUrl: './companyDetail.component.html',
     styleUrls: ['./companyDetail.component.css']
 })
-export class CompanyDetail implements OnInit {
-    @Input() item: Company;
-
-    //eventi di creazione modifica e annullamento
-    ////
-    ///http://plnkr.co/edit/v3vmZkOK4fxDXsrziqHx?p=preview
-    @Output() itemCreated = new EventEmitter<Company>();
-    @Output() itemUpdated = new EventEmitter<Company>();
-    @Output() undoSelect = new EventEmitter();
-
-    logMessage: string;
-
-    constructor(private companyService: CompanyService) { }
-
-    ngOnInit() { }
-
-
-
-    heroForm: NgForm;
-    @ViewChild('heroForm') currentForm: NgForm;
-
-    ngAfterViewChecked() {
-        this.formChanged();
-    }
-
-    formChanged() {
-        if (this.currentForm === this.heroForm) { return; }
-        this.heroForm = this.currentForm;
-        if (this.heroForm) {
-            this.heroForm.valueChanges
-                .subscribe(data => this.onValueChanged(data));
-        }
-    }
-
-    onValueChanged(data?: any) {
-        if (!this.heroForm) { return; }
-        const form = this.heroForm.form;
-
-        for (const field in this.formErrors) {
-            // clear previous error message (if any)
-            this.formErrors[field] = '';
-            const control = form.get(field);
-
-            if (control && control.dirty && !control.valid) {
-                const messages = this.validationMessages[field];
-                for (const key in control.errors) {
-                    this.formErrors[field] += messages[key] + ' ';
-                }
-            }
-        }
-    }
+export class CompanyDetail extends masterDetail_DetailComponent<Company> {
+ 
+    constructor() {
+        super();
+     }
+    
     formErrors = {
         'name': '',
         'email': ''
@@ -80,36 +37,5 @@ export class CompanyDetail implements OnInit {
             'pattern': 'Please input a valid email.'
         }
     };
-    annulla() {
-        this.undoSelect.emit();
-    }
-
-    save(item) {
-        if (item._id) {
-            this.logMessage = JSON.stringify(this.item);
-
-            this.companyService.update(item).subscribe(data => {
-                this.logMessage = "post update item" + JSON.stringify(data);
-                item.updateDate = data.updateDate;
-
-                this.itemUpdated.emit(item);
-
-            });
-        }
-        else {
-            this.add();
-        }
-    }
-    ///modalità nuovo
-    add() {
-        this.logMessage = "add item" + JSON.stringify(this.item);
-
-        this.companyService.add(this.item)
-            .subscribe(item => {
-
-                this.item = item;
-
-                this.itemCreated.emit(item);
-            });
-    }
+     
 }

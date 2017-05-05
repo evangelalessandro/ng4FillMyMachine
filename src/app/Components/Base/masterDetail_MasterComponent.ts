@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
- 
+
 import { baseService } from '../../Services/base.service';
 import { ToastServiceUtils } from '../../Utils/ToastServiceUtils';
 import { ConfirmComponent } from '../../Utils/confirm.component';
@@ -13,16 +13,24 @@ export class masterDetail_MasterComponent<T> implements OnInit {
     protected itemList: T[];
     protected logMessage: string;
 
-    protected  selectedItem: T;
-    protected  messageAlert: string;
+    protected selectedItem: T;
+    protected messageAlert: string;
 
+    Messages = {
+        'info': {
+            'messaggioConfermaCancellazione': "Elemento cancellato",
+            'messaggioConfermaInserimento': "Elemento inserito",
+            'messaggioConfermaAggiornamento': "Elemento aggiornato"
+        }
+    };
     ngOnInit() {
     }
 
-    constructor(private companyService: any,
+    constructor(private baseService: any,
         private toastyService: any,
-        private dialogService: any)  {
-        companyService.getall()
+        private dialogService: any) {
+
+        this.baseService.getall()
             .subscribe(companies => {
                 this.itemList = companies;
                 this.logMessage = JSON.stringify(companies);
@@ -30,20 +38,30 @@ export class masterDetail_MasterComponent<T> implements OnInit {
             });
 
     }
-    itemUpdated(company: T) {
+    itemUpdated(item: any) {
 
-        console.log("ToastServiceUtils " + this.toastyService);
-        this.toastyService.addToast(enTastyType.success,
-            "Success", "Azienda aggiornata", 5000);
-        this.undoSelect();
+        this.baseService.update(item).subscribe(data => {
+            this.logMessage = "post update item" + JSON.stringify(data);
+            item.updateDate = data.updateDate;
+            console.log("ToastServiceUtils " + this.toastyService);
+            this.toastyService.addToast(enTastyType.success,
+                "Salvataggio", this.Messages.info.messaggioConfermaAggiornamento , 5000);
+            this.undoSelect();
+        });
     }
 
     itemCreated(item: T) {
-        this.toastyService.addToast(enTastyType.success, "Salvataggio", "Azienda inserita")
+        this.baseService.add(item)
+            .subscribe(item => {
 
-        this.itemList.push(item);
-        // this.companies.unshift(company);
-        this.undoSelect();
+                this.toastyService.addToast(enTastyType.success,
+                    "Salvataggio",
+                    this.Messages.info.messaggioConfermaInserimento)
+                this.itemList.push(item);
+
+                this.undoSelect();
+            });
+
     }
     undoSelect() {
         this.selectedItem = undefined;
@@ -84,16 +102,17 @@ export class masterDetail_MasterComponent<T> implements OnInit {
             disposable.unsubscribe();
         }, 10000);
     }
+ 
 
-    delete(itemToDelete) {
+    protected delete(itemToDelete) {
 
         let a = function deleteItem() {
             console.log("Pre delete item", itemToDelete._id);
 
-            this.companyService.delete(itemToDelete._id).subscribe(data => {
+            this.baseService.delete(itemToDelete._id).subscribe(data => {
 
                 this.toastyService.addToast(enTastyType.info,
-                    "Info", "Azienda cancellata")
+                    "Info", this.Messages.info.messaggioConfermaCancellazione)
 
                 console.log("Delete item post chiamata servizio ", data);
                 //se trovato rimuovo

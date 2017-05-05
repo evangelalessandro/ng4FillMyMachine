@@ -9,7 +9,7 @@
 
 
     <div class="row">
-        <div *ngFor="let carico of carichi" [class.selected]="carico === selectedCarichi" (click)="showNew = false" (click)="onSelect(carico)">
+        <div *ngFor="let item of itemList" [class.selected]="item ===selectedItem" (click)="showNew = false" (click)="onSelect(item)">
 
             <div class="col-md-4">
 
@@ -20,43 +20,43 @@
                         <div class="card-data widgetCardData">
                             <div class="box-header">
                                 <div class="header-item">
-                                    <h3>{{carico.name}}</h3>
+                                    <h3>{{item.name}}</h3>
                                 </div>
                             </div>
-                            <h2 class="box-title" style="color: cadetblue;">{{carico.name}}</h2>
+                            <h2 class="box-title" style="color: cadetblue;">{{item.name}}</h2>
                             <div class="twPc-divStats">
                                 <ul class="twPc-Arrange">
 
                                     <li class="twPc-ArrangeSizeFit">
                                         <span class="twPc-StatLabel twPc-block">Mobile 1</span>
-                                        <span class="twPc-StatValue">{{carico.mobile1}}</span>
+                                        <span class="twPc-StatValue">{{item.mobile1}}</span>
 
                                     </li>
                                     <li class="twPc-ArrangeSizeFit">
                                         <span class="twPc-StatLabel twPc-block">Mobile 2</span>
-                                        <span class="twPc-StatValue">{{carico.mobile2}}</span>
+                                        <span class="twPc-StatValue">{{item.mobile2}}</span>
 
                                     </li>
                                     <li class="twPc-ArrangeSizeFit">
                                         <span class="twPc-StatLabel twPc-block">Email</span>
-                                        <span class="twPc-StatValue">{{carico.email}}</span>
+                                        <span class="twPc-StatValue">{{item.email}}</span>
                                     </li>
 
                                 </ul>
                                 <ul class="twPc-Arrange">
                                     <li class="twPc-ArrangeSizeFit">
                                         <span class="twPc-StatLabel twPc-block">Note</span>
-                                        <span class="twPc-StatValue">{{carico.note}}</span>
+                                        <span class="twPc-StatValue">{{item.note}}</span>
                                     </li>
                                 </ul>
                                 <ul class="twPc-Arrange">
                                     <li class="twPc-ArrangeSizeFit">
                                         <span class="twPc-StatLabel twPc-block">Data creazione</span>
-                                        <span class="twPc-StatValue">{{carico.creationDate}}</span>
+                                        <span class="twPc-StatValue">{{item.creationDate}}</span>
                                     </li>
                                     <li class="twPc-ArrangeSizeFit">
                                         <span class="twPc-StatLabel twPc-block">Data modifica</span>
-                                        <span class="twPc-StatValue">{{carico.updateDate}}</span>
+                                        <span class="twPc-StatValue">{{item.updateDate}}</span>
                                     </li>
                                 </ul>
                                 <span>
@@ -89,9 +89,9 @@
         <span>Log {{logMessage}} </span>
     </h2>
     <hr>
-    <div id="compnew">
+    <!--<div id="compnew">
         <div *ngIf="selectedItem">
-            <companydetail [item]="selectedItem" (undoSelect)="undoSelect()" (itemCreated)="itemCreated($event)" (itemUpdated)="itemUpdated($event)"></companydetail>
+            <caricodetail [item]="selectedItem" (undoSelect)="undoSelect()" (itemCreated)="itemCreated($event)" (itemUpdated)="itemUpdated($event)"></caricodetail>
         </div>
-    </div>
+    </div>-->
 </div>

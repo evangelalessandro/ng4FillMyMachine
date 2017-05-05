@@ -1,19 +1,19 @@
-<div *ngIf="carico">
+<div *ngIf="item">
     <form class="well">
         <div class="form-group row">
             <label for="IdName" class="col-lg-2 col-form-label">Name</label>
             <div class="form-group col-lg-3">
-                <input type="text" id="IdName" [(ngModel)]="carico.name" name="name" class="form-control" placeholder="Add Name...">
+                <input type="text" id="IdName" [(ngModel)]="item.name" name="name" class="form-control" placeholder="Add Name...">
             </div>
             <label for="InputEmail" class="col-lg-2 col-form-label">Email</label>
             <div class="form-group col-lg-3">
-                <input type="text" id="InputEmail" [(ngModel)]="carico.email" name="email" class="form-control" placeholder="Add Email...">
+                <input type="text" id="InputEmail" [(ngModel)]="item.email" name="email" class="form-control" placeholder="Add Email...">
             </div>
         </div>
         <div class="form-group row">
             <label for="IdNote" class="col-lg-2 col-form-label-lg">Note</label>
             <div class="form-group col-lg-4">
-                <input type="textarea" id="IdNote" [(ngModel)]="carico.note" name="note" class="form-control" placeholder="Note...">
+                <input type="textarea" id="IdNote" [(ngModel)]="item.note" name="note" class="form-control" placeholder="Note...">
             </div>
         </div>
         div class="form-group row">
@@ -23,28 +23,28 @@
         </div>
 
         <div class="form-group row">
-            <label for="cittasorgente" class="col-lg-2 col-form-label">Città di carico</label>
+            <label for="cittasorgente" class="col-lg-2 col-form-label">Città di item</label>
             <div class="form-group col-lg-3">
-                <input type="text" id="cittasorgente" [(ngModel)]="company.citySource" name="citySource" class="form-control" placeholder="Città di carico...">
+                <input type="text" id="cittasorgente" [(ngModel)]="company.citySource" name="citySource" class="form-control" placeholder="Città di item...">
             </div>
-            <label for="nationsorgente" class="col-lg-2 col-form-label">Nazione di carico</label>
+            <label for="nationsorgente" class="col-lg-2 col-form-label">Nazione di item</label>
             <div class="form-group col-lg-3">
-                <input type="text" id="nationsorgente" [(ngModel)]="company.nationSource" name="nationSource" class="form-control" placeholder="Nazione di carico...">
+                <input type="text" id="nationsorgente" [(ngModel)]="company.nationSource" name="nationSource" class="form-control" placeholder="Nazione di item...">
             </div>
         </div>
         <div class="form-group row">
-            <label for="cityDest" class="col-lg-2 col-form-label">Città di scarico</label>
+            <label for="cityDest" class="col-lg-2 col-form-label">Città di sitem</label>
             <div class="form-group col-lg-3">
-                <input type="text" id="cittaDestinazione" [(ngModel)]="company.cityDest" name="cityDest" class="form-control" placeholder="Città di scarico...">
+                <input type="text" id="cittaDestinazione" [(ngModel)]="company.cityDest" name="cityDest" class="form-control" placeholder="Città di sitem...">
             </div>
-            <label for="nationDest" class="col-lg-2 col-form-label">Nazione di scarico</label>
+            <label for="nationDest" class="col-lg-2 col-form-label">Nazione di sitem</label>
             <div class="form-group col-lg-3">
-                <input type="text" id="nationDest" [(ngModel)]="company.nationDest" name="nationDest" class="form-control" placeholder="Nazione di scarico...">
+                <input type="text" id="nationDest" [(ngModel)]="company.nationDest" name="nationDest" class="form-control" placeholder="Nazione di sitem...">
             </div>
         </div>
         <div class="form-group row">
             <label for="idcompany">Company</label>
-            <select class="form-control" name="idcompany" required #idcompany="ngModel" [(ngModel)]="carico.idcompany">
+            <select class="form-control" name="idcompany" required #idcompany="ngModel" [(ngModel)]="item.idcompany">
 				<option value="">Seleziona la compagnia</option>
 				<option *ngFor="let data of companylist"
 						[value]="data.name">{{data.name}}

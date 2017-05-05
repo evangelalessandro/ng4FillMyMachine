@@ -20,9 +20,15 @@ export class CompaniesComponent extends masterDetail_MasterComponent<Company>
         private dialogSer: DialogService) {
 
         super(companySer, toastySer, dialogSer)
-
-
     }
+
+    Messages = {
+        'info': {
+            'messaggioConfermaCancellazione': "Azienda cancellata",
+            'messaggioConfermaInserimento': "Azienda inserita",
+            'messaggioConfermaAggiornamento': "Azienda aggiornata"
+        }
+    };
     addNew() {
         this.logMessage = "log vuoto";
         this.selectedItem = new Company;

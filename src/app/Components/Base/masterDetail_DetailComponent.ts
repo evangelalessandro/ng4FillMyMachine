@@ -7,8 +7,8 @@ import { ReflectiveInjector } from '@angular/core';
 import { AfterViewChecked, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
- 
-export class masterDetail_DetailComponent<T > implements OnInit {
+
+export class masterDetail_DetailComponent<T> implements OnInit {
     @Input() item: T;
 
     //eventi di creazione modifica e annullamento
@@ -20,14 +20,14 @@ export class masterDetail_DetailComponent<T > implements OnInit {
 
     logMessage: string;
 
-    constructor(private baseService: any) { }
+    constructor() { }
 
     ngOnInit() { }
 
 
 
     myForm: NgForm;
-    @ViewChild('heroForm') currentForm: NgForm;
+    @ViewChild('myCurrentForm') currentForm: NgForm;
 
     ngAfterViewChecked() {
         this.formChanged();
@@ -82,30 +82,17 @@ export class masterDetail_DetailComponent<T > implements OnInit {
 
     save(item) {
         if (item._id) {
-            this.logMessage = JSON.stringify(this.item);
+            this.itemUpdated.emit(item);
 
-            this.baseService.update(item).subscribe(data => {
-                this.logMessage = "post update item" + JSON.stringify(data);
-                item.updateDate = data.updateDate;
-
-                this.itemUpdated.emit(item);
-
-            });
         }
         else {
             this.add();
         }
+        
     }
     ///modalità nuovo
-    add() {
-        this.logMessage = "add item" + JSON.stringify(this.item);
+    add() {        
+        this.itemCreated.emit(this.item);
 
-        this.baseService.add(this.item)
-            .subscribe(item => {
-
-                this.item = item;
-
-                this.itemCreated.emit(item);
-            });
     }
 }
