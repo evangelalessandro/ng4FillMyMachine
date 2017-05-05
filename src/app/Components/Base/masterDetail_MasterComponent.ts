@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from '../../Models/Company';
+ 
 import { baseService } from '../../Services/base.service';
 import { ToastServiceUtils } from '../../Utils/ToastServiceUtils';
 import { ConfirmComponent } from '../../Utils/confirm.component';

@@ -1,6 +1,6 @@
 import { baseModel } from './baseModel';
 
-export class carico {
+export class carico extends baseModel {
     
     name: string;
     note: string;
@@ -31,4 +31,5 @@ export class carico {
     };
 
     idCompany: any;
+    
 }

@@ -1,36 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Directive, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { Company } from '../../../Models/Company';
-import { CompanyService } from '../../../Services/companies.service';
+import { baseModel } from '../../Models/baseModel';
+import { baseService } from '../../Services/base.service';
 import { ReflectiveInjector } from '@angular/core';
-import { OpaqueToken } from '@angular/core';
+
 import { AfterViewChecked, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-@Component({
-    selector: 'companydetail',
-    templateUrl: './companyDetail.component.html',
-    styleUrls: ['./companyDetail.component.css']
-})
-export class CompanyDetail implements OnInit {
-    @Input() item: Company;
+ 
+export class masterDetail_DetailComponent<T > implements OnInit {
+    @Input() item: T;
 
     //eventi di creazione modifica e annullamento
     ////
     ///http://plnkr.co/edit/v3vmZkOK4fxDXsrziqHx?p=preview
-    @Output() itemCreated = new EventEmitter<Company>();
-    @Output() itemUpdated = new EventEmitter<Company>();
+    @Output() itemCreated = new EventEmitter<T>();
+    @Output() itemUpdated = new EventEmitter<T>();
     @Output() undoSelect = new EventEmitter();
 
     logMessage: string;
 
-    constructor(private companyService: CompanyService) { }
+    constructor(private baseService: any) { }
 
     ngOnInit() { }
 
 
 
-    heroForm: NgForm;
+    myForm: NgForm;
     @ViewChild('heroForm') currentForm: NgForm;
 
     ngAfterViewChecked() {
@@ -38,17 +34,17 @@ export class CompanyDetail implements OnInit {
     }
 
     formChanged() {
-        if (this.currentForm === this.heroForm) { return; }
-        this.heroForm = this.currentForm;
-        if (this.heroForm) {
-            this.heroForm.valueChanges
+        if (this.currentForm === this.myForm) { return; }
+        this.myForm = this.currentForm;
+        if (this.myForm) {
+            this.myForm.valueChanges
                 .subscribe(data => this.onValueChanged(data));
         }
     }
 
     onValueChanged(data?: any) {
-        if (!this.heroForm) { return; }
-        const form = this.heroForm.form;
+        if (!this.myForm) { return; }
+        const form = this.myForm.form;
 
         for (const field in this.formErrors) {
             // clear previous error message (if any)
@@ -88,7 +84,7 @@ export class CompanyDetail implements OnInit {
         if (item._id) {
             this.logMessage = JSON.stringify(this.item);
 
-            this.companyService.update(item).subscribe(data => {
+            this.baseService.update(item).subscribe(data => {
                 this.logMessage = "post update item" + JSON.stringify(data);
                 item.updateDate = data.updateDate;
 
@@ -104,7 +100,7 @@ export class CompanyDetail implements OnInit {
     add() {
         this.logMessage = "add item" + JSON.stringify(this.item);
 
-        this.companyService.add(this.item)
+        this.baseService.add(this.item)
             .subscribe(item => {
 
                 this.item = item;

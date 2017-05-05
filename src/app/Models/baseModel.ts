@@ -1,4 +1,4 @@
-export interface baseModel {
+export class baseModel {
     _id: any;
      
     creationDate: Date;
