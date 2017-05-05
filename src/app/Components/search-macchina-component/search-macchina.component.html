@@ -1,6 +1,10 @@
 <div>
 	<form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
 		<fieldset ngModelGroup="geo">
+
+<input type="text" [(ngModel)]="address" (setAddress)="getAddress($event)" googleplace/>
+
+
 			<div class="form-group" [ngClass]="{
         'has-danger': source.invalid && (source.dirty || source.touched),
         'has-success': source.valid && (source.dirty || source.touched)

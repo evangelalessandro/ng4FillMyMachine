@@ -21,6 +21,7 @@ import { ToastyModule } from 'ng2-toasty';
 import { ToastServiceUtils } from './Utils/ToastServiceUtils'
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { ConfirmComponent } from './Utils/confirm.component';
+import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ConfirmComponent } from './Utils/confirm.component';
     
     ConfirmComponent,
     CarichiComponent,
-    caricoDetail
+    caricoDetail,
+    GoogleplaceDirective
   ],
   imports: [
     BrowserModule,

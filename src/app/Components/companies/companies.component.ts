@@ -11,6 +11,7 @@ import { masterDetail_MasterComponent } from '../Base/masterDetail_MasterCompone
     selector: 'app-companies',
     templateUrl: './companies.component.html',
     styleUrls: ['./companies.component.css']
+   
 })
 export class CompaniesComponent extends masterDetail_MasterComponent<Company>
 {
