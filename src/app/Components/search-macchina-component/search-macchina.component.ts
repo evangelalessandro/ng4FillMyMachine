@@ -24,15 +24,16 @@ export class SearchmacchinaComponent implements OnInit {
   constructor() {
   }
 
-  public address: Object;
+  public addressSource: Object;
 
-
-  getAddress(place: Object) {
-    this.address = place['formatted_address'];
+///http://www.angular2modules.com/google
+  readAddress(place: Object) {
+    
+    this.model.partenza.address = place['formatted_address'];
     var location = place['geometry']['location'];
-    var lat = location.lat();
-    var lng = location.lng();
-    console.log("Address Object", place);
+    this.model.partenza.lat = location.lat();
+    this.model.partenza.lng = location.lng();
+    console.log(place);
   }
   
   ngOnInit() {
@@ -57,18 +58,28 @@ export class SearchmacchinaComponent implements OnInit {
 
 
   onSubmit() {
+    console.log(this.addressSource);
     if (this.form.valid) {
-      console.log("Form Submitted!");
-
+      
+      
     }
   }
 
 
 }
 class searchmacchina {
-  constructor(public source: string = '',
-    public destination: string = '',
-    public date: Date = new Date(),
-  ) {
+
+  partenza = {
+    'address': '',
+    'location': '',
+    'lat': '',
+    'lng': ''
   }
+  destinazione = {
+    'address': '',
+    'location': '',
+    'lat': '',
+    'lng': ''
+  }
+  'data' :''
 }

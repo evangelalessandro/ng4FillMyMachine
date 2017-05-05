@@ -1,56 +1,59 @@
 <div>
-	<form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
-		<fieldset ngModelGroup="geo">
+  <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
+    <fieldset ngModelGroup="geo">
 
-<input type="text" [(ngModel)]="address" (setAddress)="getAddress($event)" googleplace/>
+     
 
-
-			<div class="form-group" [ngClass]="{
+      <div class="form-group" [ngClass]="{
         'has-danger': source.invalid && (source.dirty || source.touched),
         'has-success': source.valid && (source.dirty || source.touched)
    }">
-				<label>Partenza</label>
-				<input type="text" class="form-control" name="source" [(ngModel)]="model.source" required #source="ngModel">
-				<div class="form-control-feedback" *ngIf="source.errors && (source.dirty || source.touched)">
-					<p *ngIf="source.errors.required">First name is required</p>
-				</div>
-			</div>
+        <label>Partenza</label>
+        <input type="text" class="form-control"  
+		[(ngModel)]="addressSource" (onchange)="readAddress($event)" googleplace
+          required  >
+        <div class="form-control-feedback" *ngIf="source.errors && (source.dirty || source.touched)">
+          <p *ngIf="source.errors.required">First name is required</p>
+        </div>
+      </div>
 
-			<div class="form-group" [ngClass]="{
+      <div class="form-group" [ngClass]="{
         'has-danger': arrivo.invalid && (arrivo.dirty || arrivo.touched),
         'has-success': arrivo.valid && (arrivo.dirty || arrivo.touched)
    }">
-				<label>Arrivo</label>
-				<input type="text" class="form-control" name="arrivo" [(ngModel)]="model.arrivo" required #arrivo="ngModel">
-				<div class="form-control-feedback" *ngIf="arrivo.errors && (arrivo.dirty || arrivo.touched)">
-					<p *ngIf="arrivo.errors.required">La città di arrivo è richiesta</p>
-				</div>
-			</div>
-		</fieldset>
+        <label>Arrivo</label>
+        <input type="text" class="form-control" name="arrivo" [(ngModel)]="model.arrivo" required #arrivo="ngModel">
+        <div class="form-control-feedback" *ngIf="arrivo.errors && (arrivo.dirty || arrivo.touched)">
+          <p *ngIf="arrivo.errors.required">La città di arrivo è richiesta</p>
+        </div>
+      </div>
+    </fieldset>
 
 
 
 
-		<div class="form-group" [ngClass]="{
+    <div class="form-group" [ngClass]="{
         'has-danger': dataPartenza.invalid && (dataPartenza.dirty || dataPartenza.touched),
         'has-success': dataPartenza.valid && (dataPartenza.dirty || dataPartenza.touched)
 		}">
-			<div class="form-control-feedback" *ngIf="dataPartenza.errors && (dataPartenza.dirty || dataPartenza.touched)">
-				<p *ngIf="dataPartenza.errors.required">dataPartenza is required</p>> </div>
+      <div class="form-control-feedback" *ngIf="dataPartenza.errors && (dataPartenza.dirty || dataPartenza.touched)">
+        <p *ngIf="dataPartenza.errors.required">dataPartenza is required</p>> </div>
 
-			<label>Data Partenza</label>
-			<select class="form-control" name="dataPartenza" required #dataPartenza="ngModel" [(ngModel)]="model.dataPartenza">
+      <label>Data Partenza</label>
+      <select class="form-control" name="dataPartenza" required #dataPartenza="ngModel" [(ngModel)]="model.dataPartenza">
 				<option value="">Seleziona la data</option>
 				<option *ngFor="let data of dateDisponibili"
 						[value]="data">{{data}}
 				</option>
 			</select>
-		</div>
+    </div>
 
 
 
-		<button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit
 	</button>
-		<pre>{{f.value | json}}</pre>
-	</form>
+    <pre>{{f.value | json}}</pre>
+	<pre>{{model | json}}</pre>
+	 
+  </form>
 </div>

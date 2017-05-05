@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Directive, ElementRef, Input } from '@angular/core';
-import { carico } from '../../../Models/carico';
+import { caricoModel } from '../../../Models/caricoModel';
 import { carichiService } from '../../../Services/carichi.service';
 import { CompanyService } from '../../../Services/companies.service';
+import { masterDetail_DetailComponent } from '../../Base/masterDetail_DetailComponent'
 
 import { Company} from '../../../Models/Company';
 
@@ -11,13 +12,15 @@ import { Company} from '../../../Models/Company';
     templateUrl: './caricoDetail.component.html',
     styleUrls: ['./caricoDetail.component.css']
 })
-export class caricoDetail implements OnInit {
-    @Input() carico: carico;
-    @Input() carichi: carico[];
+export class caricoDetail extends masterDetail_DetailComponent<caricoModel>{
+   
     companylist: Company[];
     logMessage: string;
 
-    constructor(private service: carichiService, private companyService: CompanyService  ) {
+    constructor(private service: carichiService, private companyService: CompanyService)
+    {
+        super();
+
         companyService.getall()
             .subscribe(companies => {
                 this.companylist = companies;
@@ -35,37 +38,5 @@ export class caricoDetail implements OnInit {
             });
      }
 
-    ngOnInit() { }
-
-    save() {
-        if (this.carico._id) {
-            this.logMessage = JSON.stringify(this.carico);
-
-            this.service.update(this.carico).subscribe(data => {
-                this.logMessage = "post update  " + JSON.stringify(data);
-                this.carico.updateDate = data.updateDate;
-            });
-        }
-        else {
-            this.add();
-        }
-    }
-    ///modalità nuovo
-    add() {
-        this.logMessage = "add " + JSON.stringify(this.carico);
-
-        this.service.add(this.carico)
-            .subscribe(item => {
-
-                var i = 0;
-                this.carichi.forEach(element => {
-                    if (!element._id) {
-                        this.carichi.splice(i, 1);
-                    }
-                    i++;
-                });
-                this.carichi.push(item);
-                this.carico = item;
-            });
-    }
+    
 }

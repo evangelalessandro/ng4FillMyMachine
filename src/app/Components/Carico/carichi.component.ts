@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { carico } from '../../Models/carico'
+import { caricoModel } from '../../Models/caricoModel'
 import { carichiService } from '../../Services/carichi.service';
 import { ToastServiceUtils } from '../../Utils/ToastServiceUtils';
 import { ConfirmComponent } from '../../Utils/confirm.component';
@@ -11,7 +11,7 @@ import { masterDetail_MasterComponent } from '../Base/masterDetail_MasterCompone
     templateUrl: './carichi.component.html',
     styleUrls: ['./carichi.component.css']
 })
-export class CarichiComponent extends masterDetail_MasterComponent<carico>
+export class CarichiComponent extends masterDetail_MasterComponent<caricoModel>
 {
 
     constructor(private companySer: carichiService,
@@ -24,7 +24,7 @@ export class CarichiComponent extends masterDetail_MasterComponent<carico>
     }
     addNew() {
         this.logMessage = "log vuoto";
-        this.selectedItem = new carico;
+        this.selectedItem = new caricoModel;
     }
 
 }
