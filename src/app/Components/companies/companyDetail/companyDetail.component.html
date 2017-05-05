@@ -4,9 +4,8 @@
             <label for="IdName" class="col-lg-2 col-form-label">Name</label>
             <div class="form-group col-lg-3">
 
-                <input type="text" id="name" class="form-control"
-                 required minlength="3" maxlength="50" forbiddenName="ass" 
-                 name="name" [(ngModel)]="item.name" placeholder="Add Name...">
+                <input type="text" id="name" class="form-control" required minlength="3" maxlength="50" forbiddenName="ass" name="name" [(ngModel)]="item.name"
+                    placeholder="Add Name...">
 
                 <div *ngIf="formErrors.name" class="alert alert-danger">
                     {{ formErrors.name }}
@@ -14,10 +13,8 @@
             </div>
             <label for="InputEmail" class="col-lg-2 col-form-label">Email</label>
             <div class="form-group col-lg-3">
-                <input type="email" id="InputEmail" [(ngModel)]="item.email" 
-                    name="email" class="form-control" placeholder="Add Email..."
-                    required 
-                    pattern="^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$">
+                <input type="email" id="InputEmail" [(ngModel)]="item.email" name="email" class="form-control" placeholder="Add Email..."
+                    required pattern="^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$">
                 <div *ngIf="formErrors.email" class="alert alert-danger">
                     {{ formErrors.email }}
                 </div>
