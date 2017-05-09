@@ -6,6 +6,7 @@ var index = require('./routes/index');
 var tasks = require('./routes/tasks');
 var companies = require('./routes/companies');
 var carichi = require('./routes/carichi');
+var tipicamion = require('./routes/tipicamion');
 
 var port = 3000;
 
@@ -24,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/', index);
-app.use('/api', [tasks, companies, carichi]);
+app.use('/api', [tasks, companies, carichi, tipicamion  ]);
 
 
 /*// Add headers

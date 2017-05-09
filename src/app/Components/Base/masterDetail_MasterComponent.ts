@@ -53,7 +53,7 @@ export class masterDetail_MasterComponent<T> implements OnInit {
     itemCreated(item: T) {
         this.baseService.add(item)
             .subscribe(item => {
-
+                console.log("item created");
                 this.toastyService.addToast(enTastyType.success,
                     "Salvataggio",
                     this.Messages.info.messaggioConfermaInserimento)

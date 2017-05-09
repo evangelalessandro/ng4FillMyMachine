@@ -1,0 +1,88 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+<div class="container">
+    <div class="col-lg-12">
+        <h1>Tipi camion
+            <a class="btn icon-btn btn-primary pull-right" (click)="addNew()" scrollTo scrollTargetSelector="#compnew">
+        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle"></span>Aggiungi nuovo</a>
+        </h1>
+
+    </div>
+    <div class="space"></div>
+    <div class="row">
+        <div *ngFor="let item of itemList" [class.selected]="item=== selectedItem">
+
+            <div class="col-md-4">
+
+                <div class="card-base">
+                    <div class="card-icon">
+                        <span title="Widgets" id="widgetCardIcon" class="imagecard">
+              <i class="material-icons">business</i></span>
+                        <div class="card-data widgetCardData">
+                            <div class="box-header">
+                                <div class="header-item">
+                                    <h3>{{item.name}}</h3>
+                                </div>
+                            </div>
+                            <div class="twPc-divStats">
+                                <ul class="twPc-Arrange">
+
+                                    <li class="twPc-ArrangeSizeFit">
+                                        <span class="twPc-StatLabel twPc-block">food: </span>
+                                        <span class="twPc-StatValue">{{item.food}}</span>
+                                        
+
+                                    </li>
+                                    <li class="twPc-ArrangeSizeFit">
+                                        <span class="twPc-StatLabel twPc-block">refrigetor</span>
+                                        <span class="twPc-StatValue">{{item.refrigetor}}</span>
+
+                                    </li>
+                                </ul>
+                                 <ul class="twPc-Arrange">
+                                    <li class="twPc-ArrangeSizeFit">
+                                        <span class="twPc-StatLabel twPc-block">Data creazione</span>
+                                        <span class="twPc-StatValue">{{item.creationDate}}</span>
+                                    </li>
+                                    <li class="twPc-ArrangeSizeFit">
+                                        <span class="twPc-StatLabel twPc-block">Data modifica</span>
+                                        <span class="twPc-StatValue">{{item.updateDate}}</span>
+                                    </li>
+
+                                </ul>
+
+                                <span>
+                    <input type="button" scrollTo scrollTargetSelector="#compnew" 
+                    value="Modifica" 
+                    (click)="onSelect(item)" 
+                    class="btn btn-success btn-rounded btn-lg">
+                    
+                       
+                    <input type="button" 
+                    (click)="delete(item)" 
+
+                    value="Cancella" 
+                    class="btn btn-danger btn-rounded btn-lg">
+                    
+                  </span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>
+        <pre>
+      {{selectedItem | json}}
+    </pre>
+        <!--  <span>Log {{logMessage }} </span>-->
+    </h2>
+    <hr>
+    <div id="compnew">
+        <div *ngIf="selectedItem">
+            <tipicamiondetail [item]="selectedItem" (undoSelect)="undoSelect()" (itemCreated)="itemCreated($event)" (itemUpdated)="itemUpdated($event)"></tipicamiondetail>
+        </div>
+    </div>
+</div>

@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 
 
 export class masterDetail_DetailComponent<T> implements OnInit {
-    @Input() item: T;
+    @Input() protected item: T;
 
     //eventi di creazione modifica e annullamento
     ////
@@ -18,6 +18,9 @@ export class masterDetail_DetailComponent<T> implements OnInit {
     @Output() itemUpdated = new EventEmitter<T>();
     @Output() undoSelect = new EventEmitter();
 
+    validationMessages: any;
+    formErrors: any;
+ 
     logMessage: string;
 
     constructor() { }
@@ -32,7 +35,7 @@ export class masterDetail_DetailComponent<T> implements OnInit {
     ngAfterViewChecked() {
         this.formChanged();
     }
-
+    
     formChanged() {
         if (this.currentForm === this.myForm) { return; }
         this.myForm = this.currentForm;
@@ -59,23 +62,8 @@ export class masterDetail_DetailComponent<T> implements OnInit {
             }
         }
     }
-    formErrors = {
-        'name': '',
-        'email': ''
-    };
 
-    validationMessages = {
-        'name': {
-            'required': 'Name is required.',
-            'minlength': 'Name must be at least 3 characters long.',
-            'maxlength': 'Name cannot be more than 50 characters long.',
-            'forbiddenName': 'Some name cannot be a name of a company.'
-        },
-        'email': {
-            'required': 'Email is required.',
-            'pattern': 'Please input a valid email.'
-        }
-    };
+     
     annulla() {
         this.undoSelect.emit();
     }

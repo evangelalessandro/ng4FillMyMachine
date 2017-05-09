@@ -12,6 +12,12 @@ import { carichiService } from './Services/carichi.service';
 
 import { CarichiComponent } from './components/carico/carichi.component';
 import { caricoDetail } from './components/carico/Carico-Detail/caricoDetail.component';
+
+import { tipiCamionComponent } from './components/Configuration/TipiCamion/tipicamion.component';
+import { tipicamionDetailComponent } from './components/Configuration/TipiCamion/TipicamionDetail/tipicamionDetail.component';
+import { tipiCamionService } from './Services/tipiCamion.service';
+
+
 import { ScrollToModule } from 'ng2-scroll-to';
 
 import { CompaniesComponent } from './components/companies/companies.component';
@@ -35,6 +41,9 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
     CompaniesComponent,
     CompanyDetail,
     
+    tipiCamionComponent,
+    tipicamionDetailComponent,
+
     ConfirmComponent,
     CarichiComponent,
     caricoDetail,
@@ -70,13 +79,19 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
         path: 'carichi',
         component: CarichiComponent,
       },
+      
+
+      {
+        path: 'configuration/tipicamion',
+        component: tipiCamionComponent,
+      },
     ])
   ],
   //Don't forget to add the component to entryComponents section
   entryComponents: [
     ConfirmComponent
   ],
-  providers: [macchinasService, CompanyService, carichiService, ToastServiceUtils ],
+  providers: [tipiCamionService, macchinasService, CompanyService, carichiService, ToastServiceUtils ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
