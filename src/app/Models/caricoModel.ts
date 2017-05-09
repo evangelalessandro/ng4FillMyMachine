@@ -2,6 +2,12 @@ import { baseModel } from './baseModel';
 
 export class caricoModel extends baseModel {
     
+    constructor()
+    {
+        super();
+        
+        this.source = new geoModel();
+    }
     name: string;
     note: string;
     mobile1: string;
@@ -14,22 +20,26 @@ export class caricoModel extends baseModel {
     ///kg di carico
     kg: number;
     //tipo camion
-    trucktype: number;
+    idtipocamion: any;
+ 
+    source: geoModel;
+   
 
-    nationSource: string;    
-    citySource: string;
-    locSource: {
-        lon: number,
-        lat: number
-    };
+    destination: {
+        nation: string;
+        city: string;
 
-    nationDest: string;
-    cityDest: string;
-    locDest: {
-        lon: number,
+        lng: number,
         lat: number
     };
 
     idCompany: any;
     
 }
+export class geoModel
+{
+    nation: string;
+    city: string;
+    lng: number;
+    lat: number;
+ }

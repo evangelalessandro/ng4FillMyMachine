@@ -1,36 +1,37 @@
 <div>
   <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
-    <fieldset ngModelGroup="geo">
-
+     
      
 
       <div class="form-group" [ngClass]="{
         'has-danger': source.invalid && (source.dirty || source.touched),
-        'has-success': source.valid && (source.dirty || source.touched)
-   }">
+        'has-success': source.valid && (source.dirty || source.touched)}">
         <label>Partenza</label>
-        <input type="text" class="form-control"  
-		[(ngModel)]="addressSource" (onchange)="readAddress($event)" googleplace
+        <input type="text" class="form-control"   
+		[(ngModel)]="model" name="source" (onchange)="readAddress($event)" 
           required  >
         <div class="form-control-feedback" *ngIf="source.errors && (source.dirty || source.touched)">
-          <p *ngIf="source.errors.required">First name is required</p>
+          <p *ngIf="source.errors.required">Partenza name is required</p>
         </div>
       </div>
+<!--
 
       <div class="form-group" [ngClass]="{
         'has-danger': arrivo.invalid && (arrivo.dirty || arrivo.touched),
         'has-success': arrivo.valid && (arrivo.dirty || arrivo.touched)
    }">
         <label>Arrivo</label>
-        <input type="text" class="form-control" name="arrivo" [(ngModel)]="model.arrivo" required #arrivo="ngModel">
+        <input type="text" googleplace (setAddress) = "getAddress($event)" class="form-control" name="arrivo" [(ngModel)]="model.arrivo" required #arrivo="ngModel">
         <div class="form-control-feedback" *ngIf="arrivo.errors && (arrivo.dirty || arrivo.touched)">
           <p *ngIf="arrivo.errors.required">La città di arrivo è richiesta</p>
         </div>
       </div>
-    </fieldset>
+      <pre>
+      {{model | json}}
+    </pre>
+    
 
-
-
+-->
 
     <div class="form-group" [ngClass]="{
         'has-danger': dataPartenza.invalid && (dataPartenza.dirty || dataPartenza.touched),
@@ -40,14 +41,15 @@
         <p *ngIf="dataPartenza.errors.required">dataPartenza is required</p>> </div>
 
       <label>Data Partenza</label>
-      <select class="form-control" name="dataPartenza" required #dataPartenza="ngModel" [(ngModel)]="model.dataPartenza">
+      <select class="form-control" name="dataPartenza" required #dataPartenza="ngModel" 
+      [(ngModel)]="model.dataPartenza">
 				<option value="">Seleziona la data</option>
 				<option *ngFor="let data of dateDisponibili"
 						[value]="data">{{data}}
 				</option>
 			</select>
     </div>
-
+     
 
 
     <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Directive, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { tipicamionModel } from '../../../../Models/tipicamionModel';
+import { tipiCamionModel } from '../../../../Models/tipiCamionModel';
 import { tipiCamionService} from '../../../../Services/tipiCamion.service';
  import { AfterViewChecked, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -12,7 +12,7 @@ import { masterDetail_DetailComponent } from '../../../Base/masterDetail_DetailC
     templateUrl: './tipicamiondetail.component.html',
     styleUrls: ['./tipicamiondetail.component.css']
 })
-export class tipicamionDetailComponent extends masterDetail_DetailComponent<tipicamionModel> {
+export class tipicamionDetailComponent extends masterDetail_DetailComponent<tipiCamionModel> {
  
     constructor() {
         super();
@@ -26,8 +26,8 @@ export class tipicamionDetailComponent extends masterDetail_DetailComponent<tipi
         'name': {
             'required': 'Name is required.',
             'minlength': 'Name must be at least 3 characters long.',
-            'maxlength': 'Name cannot be more than 50 characters long.',
-            'forbiddenName': 'Some name cannot be a name of a company.'
+            'maxlength': 'Name cannot be more than 50 characters long.' 
+             
         },
     };
      

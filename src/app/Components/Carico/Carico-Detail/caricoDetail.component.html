@@ -1,66 +1,85 @@
 <div *ngIf="item">
-  <form class="well">
+  <form class="well" #myCurrentForm="ngForm">
     <div class="form-group row">
-      <label for="IdName" class="col-lg-2 col-form-label">Name</label>
-      <div class="form-group col-lg-3">
-        <input type="text" id="IdName" [(ngModel)]="item.name" name="name" class="form-control" placeholder="Add Name...">
-      </div>
-      <label for="InputEmail" class="col-lg-2 col-form-label">Email</label>
-      <div class="form-group col-lg-3">
-        <input type="text" id="InputEmail" [(ngModel)]="item.email" name="email" class="form-control" placeholder="Add Email...">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="IdNote" class="col-lg-2 col-form-label-lg">Note</label>
+      <label for="name" class="col-lg-2 col-form-label-lg">Nome</label>
       <div class="form-group col-lg-4">
-        <input type="textarea" id="IdNote" [(ngModel)]="item.note" name="note" class="form-control" placeholder="Note...">
+        <input type="text" id="name" [(ngModel)]="item.name" name="name"
+         class="form-control" placeholder="Nome...">
       </div>
-    </div>
-   
-    <div class="form-group row">
+
       <label for="IdMobile1" class="col-lg-2 col-form-label-lg">Mobile 1</label>
       <div class="form-group col-lg-4">
-        <input type="text" id="IdMobile1" [(ngModel)]="item.mobile1" name="mobile1" 
-        class="form-control" placeholder="Mobile 1...">
+        <input type="text" id="IdMobile1" [(ngModel)]="item.mobile1" name="mobile1" class="form-control" placeholder="Mobile 1...">
       </div>
     </div>
-      <div class="form-group row">
-        <label for="cittasorgente" class="col-lg-2 col-form-label"> Città presenza carico</label>
-        <div class="form-group col-lg-3">
-          <input type="text" id="cittasorgente" [(ngModel)]="item.citySource" name="citySource" class="form-control" placeholder="Città di item...">
-        </div>
-        <label for="nationsorgente" class="col-lg-2 col-form-label">Nazione presenza del carico</label>
-        <div class="form-group col-lg-3">
-          <input type="text" id="nationsorgente" [(ngModel)]="item.nationSource" name="nationSource" class="form-control" placeholder="Nazione di item...">
-        </div>
+    <div class="form-group row">
+      <label for="cittasorgente" class="col-lg-2 col-form-label">Città di carico</label>
+      <div class="form-group col-lg-3">
+        <input type="text" id="cittasorgente" [(ngModel)]="source.city"
+         class="form-control" name="city" placeholder="Città di carico" required>
       </div>
-    
-      <div class="form-group row">
-        <label for="cityDest" class="col-lg-2 col-form-label">Città di destinazione</label>
-        <div class="form-group col-lg-3">
-          <input type="text" id="cittaDestinazione" [(ngModel)]="item.cityDest" name="cityDest" class="form-control" placeholder="Città di sitem...">
-        </div>
-        <label for="nationDest" class="col-lg-2 col-form-label">Nazione di destinazione</label>
-        <div class="form-group col-lg-3">
-          <input type="text" id="nationDest" [(ngModel)]="item.nationDest" name="nationDest" class="form-control" placeholder="Nazione di sitem...">
-        </div>
+      <div *ngIf="formErrors.source.city" class="alert alert-danger">
+        {{ formErrors.source.city }}
       </div>
-   <div class="form-group row">
-        <label for="idcompany">Company</label>
-        <select class="form-control" name="idcompany" required #idcompany="ngModel" [(ngModel)]="item.idcompany">
+      <label for="nationsorgente" class="col-lg-2 col-form-label">Nazione di carico</label>
+      <div class="form-group col-lg-3">
+        <input type="text" id="nationsorgente" [(ngModel)]="source.nation" name="nationSource" class="form-control" placeholder="Nazione di carico...">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="tipocamion" class="col-lg-2 col-form-label">Tipo camion</label>
+      <div class="form-group col-lg-3">
+
+        <select class="form-control" name="tipocamion" required #tipocamion="ngModel" [(ngModel)]="item.tipocamion">
+				<option value="">Seleziona tipo camion</option>
+				<option *ngFor="let data of tipicamionList"
+						[value]="data._id">{{data.name}}
+				</option>
+			</select>
+      </div>
+      <div *ngIf="formErrors.source.city" class="alert alert-danger">
+
+      </div>
+
+    </div>
+
+    <!--
+    <div class="form-group row">
+      <label for="cityDest" class="col-lg-2 col-form-label">Città di scarico</label>
+      <div class="form-group col-lg-3">
+        <input type="text" googleplace id="cittaDestinazione" (setAddress)="getAddress($event)" [(ngModel)]="item.destination.city"
+          name="cityDest" class="form-control" placeholder="Città di destinazione..."
+           required>
+      </div>
+      <div *ngIf="formErrors.source.city" class="alert alert-danger">
+        {{ formErrors.destination.city }}
+      </div>
+      <label for="nationDest" class="col-lg-2 col-form-label">Nazione di scarico</label>
+      <div class="form-group col-lg-3">
+        <input type="text" id="nationDest" [(ngModel)]="item.destination.nation" name="nationDest" class="form-control" placeholder="Nazione di sitem...">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="idcompany">Company</label>
+      <select class="form-control" name="idcompany" required #idcompany="ngModel" 
+      [(ngModel)]="item.idcompany">
 				<option value="">Seleziona la compagnia</option>
 				<option *ngFor="let data of companylist"
 						[value]="data.name">{{data.name}}
 				</option>
 			</select>
+    -->
+    <div class="form-group col-lg-1">
+      <input type="button" [disabled]="!myCurrentForm.form.valid" (click)="save(item)" value="Salva" class="btn btn-success">
+    </div>
+    <div class="form-group col-lg-1">
+      <input type="button" (click)="annulla()" value="Annulla" class="btn btn-danger">
+    </div>
 
-        <div class="form-group col-lg-1">
-          <input type="button" (click)="save()" value="Save" class="btn btn-success">
-        </div>
-      </div>
- 
- 
+
+    <h2> Dati da selezione {{item | json}}</h2>
   </form>
   <hr>
   <h1> {{logMessage}}</h1>
-  </div>
+  <hr>
+</div>

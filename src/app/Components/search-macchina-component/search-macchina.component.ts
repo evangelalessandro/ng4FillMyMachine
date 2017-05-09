@@ -18,9 +18,29 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
 
 export class SearchmacchinaComponent implements OnInit {
 
-  model: searchmacchina = new searchmacchina();
+  public model: searchmacchina=new searchmacchina() ;
   @ViewChild('f') form: any;
   dateDisponibili: string[] = [];
+  public address: Object;
+
+  getAddress(place: Object) {
+    this.address = place['formatted_address'];
+    
+    this.model.destinazione.address = place['formatted_address'];
+    
+    var location = place['geometry']['location'];
+  //this.model.destinazione.location = location;
+
+    var lat = location.lat();
+    var lng = location.lng();
+    this.model.destinazione.lat = lat;
+    this.model.destinazione.lng = lng;
+
+    console.log("Address Object", this.model);
+    
+
+  }
+
   constructor() {
   }
 
@@ -58,7 +78,7 @@ export class SearchmacchinaComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.addressSource);
+    console.log(this.model.partenza.address);
     if (this.form.valid) {
       
       
@@ -66,14 +86,14 @@ export class SearchmacchinaComponent implements OnInit {
   }
 
 
-}
-class searchmacchina {
+} class searchmacchina {
 
+  source='';
   partenza = {
-    'address': '',
-    'location': '',
-    'lat': '',
-    'lng': ''
+    address: '',
+    location: '',
+    lat: '',
+    lng: ''
   }
   destinazione = {
     'address': '',
@@ -81,5 +101,5 @@ class searchmacchina {
     'lat': '',
     'lng': ''
   }
-  'data' :''
+  dataPartenza :''
 }

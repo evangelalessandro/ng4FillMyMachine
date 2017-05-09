@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Directive, ElementRef, Input } from '@angular/core';
-import { caricoModel } from '../../../Models/caricoModel';
+import { caricoModel,geoModel } from '../../../Models/caricoModel';
+
+import { tipiCamionModel } from '../../../Models/tipiCamionModel';
 import { carichiService } from '../../../Services/carichi.service';
+import { tipiCamionService } from '../../../Services/tipiCamion.service';
 import { CompanyService } from '../../../Services/companies.service';
 import { masterDetail_DetailComponent } from '../../Base/masterDetail_DetailComponent'
-
-import { Company} from '../../../Models/Company';
+import { Company } from '../../../Models/Company';
 
 @Component({
     selector: 'caricodetail',
@@ -13,30 +15,97 @@ import { Company} from '../../../Models/Company';
     styleUrls: ['./caricoDetail.component.css']
 })
 export class caricoDetail extends masterDetail_DetailComponent<caricoModel>{
-   
+
     companylist: Company[];
+    tipicamionList: tipiCamionModel[];
     logMessage: string;
 
-    constructor(private service: carichiService, private companyService: CompanyService)
-    {
+    source: geoModel;
+ 
+
+    ngOnInit() {
+        this.source = this.item.source;
+
+     }
+   
+     
+    constructor(private service: carichiService,
+        private tipocamionService: tipiCamionService,
+        private companyService: CompanyService) {
         super();
 
-        companyService.getall()
-            .subscribe(companies => {
-                this.companylist = companies;
-                this.companylist.sort(function (a,  b)
-                {
+     
+        tipocamionService.getall()
+            .subscribe(tipocamion => {
+                this.tipicamionList = tipocamion;
+                this.tipicamionList.sort(function (a, b) {
                     if (a.name > b.name)
                         return 1;
                     else if (a.name < b.name)
                         return -1;
                     else
-                        return 0;    
-                    }
+                        return 0;
+                }
                 )
-                
-            });
-     }
 
-    
+            });
+
+        companyService.getall()
+            .subscribe(companies => {
+                this.companylist = companies;
+                this.companylist.sort(function (a, b) {
+                    if (a.name > b.name)
+                        return 1;
+                    else if (a.name < b.name)
+                        return -1;
+                    else
+                        return 0;
+                }
+                )
+
+            });
+    }
+
+    getAddress(place: Object) {
+        var address = place['formatted_address'];
+
+        this.item.destination.city = place['formatted_address'];
+
+        var location = place['geometry']['location'];
+        //this.model.destinazione.location = location;
+        //this.item.destination.nation = place['country'];
+        var lat = location.lat();
+        var lng = location.lng();
+        this.item.destination.lat = lat;
+        this.item.destination.lng = lng;
+
+        this.logMessage = JSON.stringify(this.item);
+    }
+
+    formErrors = {
+        'name': '',
+        'Email':'',
+        'source': {
+            'city': '',
+            'nation': ''
+        },
+        'destination': {
+            'city': '',
+            'nation': ''
+        }
+
+    };
+
+    validationMessages = {
+        'source': {
+            'city': {
+                'required': 'Load city is required.',
+            }
+        },
+        'destination': {
+            'city': {
+                'required': 'Email is required.'
+            }
+        }
+    };
 }

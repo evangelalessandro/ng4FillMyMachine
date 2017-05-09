@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { tipicamionModel } from '../../../Models/tipicamionModel'
+import { tipiCamionModel } from '../../../Models/tipiCamionModel'
 import { tipiCamionService } from '../../../Services/tipiCamion.service';
 import { ToastServiceUtils } from '../../../Utils/ToastServiceUtils';
 import { ConfirmComponent } from '../../../Utils/confirm.component';
@@ -13,7 +13,7 @@ import { masterDetail_MasterComponent } from '../../Base/masterDetail_MasterComp
     styles:['./tipicamion.component.css']
 })
 
-export class tipiCamionComponent extends masterDetail_MasterComponent<tipicamionModel>
+export class tipiCamionComponent extends masterDetail_MasterComponent<tipiCamionModel>
 {    
     constructor(private serviceObj: tipiCamionService,
         private toastySer: ToastServiceUtils,
@@ -25,7 +25,7 @@ export class tipiCamionComponent extends masterDetail_MasterComponent<tipicamion
 
     addNew() {
         this.logMessage = "log vuoto";
-        this.selectedItem = new tipicamionModel;
+        this.selectedItem = new tipiCamionModel;
     }
 
 }
