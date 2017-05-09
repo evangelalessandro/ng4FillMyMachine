@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Directive, ElementRef, Input } from '@angular/core';
-import { caricoModel,geoModel } from '../../../Models/caricoModel';
+import { caricoModel, geoModel } from '../../../Models/caricoModel';
 
 import { tipiCamionModel } from '../../../Models/tipiCamionModel';
 import { carichiService } from '../../../Services/carichi.service';
@@ -21,20 +21,25 @@ export class caricoDetail extends masterDetail_DetailComponent<caricoModel>{
     logMessage: string;
 
     source: geoModel;
- 
+
 
     ngOnInit() {
+
+        console.log(" item " + this.item);
+
+        console.log(" item source " + this.item.source);
+
         this.source = this.item.source;
 
-     }
-   
-     
+    }
+
+
     constructor(private service: carichiService,
         private tipocamionService: tipiCamionService,
         private companyService: CompanyService) {
         super();
 
-     
+
         tipocamionService.getall()
             .subscribe(tipocamion => {
                 this.tipicamionList = tipocamion;
@@ -67,24 +72,35 @@ export class caricoDetail extends masterDetail_DetailComponent<caricoModel>{
     }
 
     getAddress(place: Object) {
-        var address = place['formatted_address'];
+        var adr_address = place['adr_address'];
+        var n = adr_address.indexOf("country-name");
+         
+        
+        if (n > 0) {
+            adr_address = adr_address.substr(n + 14);
 
-        this.item.destination.city = place['formatted_address'];
+           // console.log(adr_address);
+            n = adr_address.indexOf("</span>");
+            
+            this.item.source.nation = adr_address.substr(0, n);
+           
+            this.item.source.city = place['formatted_address'];
 
-        var location = place['geometry']['location'];
-        //this.model.destinazione.location = location;
-        //this.item.destination.nation = place['country'];
-        var lat = location.lat();
-        var lng = location.lng();
-        this.item.destination.lat = lat;
-        this.item.destination.lng = lng;
+            var location = place['geometry']['location'];
+            //this.model.destinazione.location = location;
+            //this.item.destination.nation = place['country'];
+            var lat = location.lat();
+            var lng = location.lng();
+            this.item.source.lat = lat;
+            this.item.source.lng = lng;
+        }
 
         this.logMessage = JSON.stringify(this.item);
     }
 
     formErrors = {
         'name': '',
-        'Email':'',
+        'Email': '',
         'source': {
             'city': '',
             'nation': ''

@@ -16,7 +16,7 @@
       <label for="cittasorgente" class="col-lg-2 col-form-label">Città di carico</label>
       <div class="form-group col-lg-3">
         <input type="text" id="cittasorgente" [(ngModel)]="source.city"
-         class="form-control" name="city" placeholder="Città di carico" required>
+         class="form-control" name="city" placeholder="Città di carico" (setAddress)="getAddress($event)" googleplace  required>
       </div>
       <div *ngIf="formErrors.source.city" class="alert alert-danger">
         {{ formErrors.source.city }}
