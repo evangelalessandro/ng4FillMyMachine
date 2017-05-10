@@ -10,12 +10,17 @@ import { CompanyService } from './Services/companies.service';
 import { macchinasService } from './Services/macchinas.service';
 import { carichiService } from './Services/carichi.service';
 
+import { caricoPrimeMode } from './components/CaricoPrimeMode/caricoPrimeMode.component';
+
+
 import { CarichiComponent } from './components/carico/carichi.component';
 import { caricoDetail } from './components/carico/Carico-Detail/caricoDetail.component';
 
 import { tipiCamionComponent } from './components/Configuration/TipiCamion/tipicamion.component';
 import { tipicamionDetailComponent } from './components/Configuration/TipiCamion/TipicamionDetail/tipicamionDetail.component';
 import { tipiCamionService } from './Services/tipiCamion.service';
+
+import { caricoModel,geoModel } from './Models/caricoModel';
 
 
 import { ScrollToModule } from 'ng2-scroll-to';
@@ -28,10 +33,17 @@ import { ToastServiceUtils } from './Utils/ToastServiceUtils'
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { ConfirmComponent } from './Utils/confirm.component';
 import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
+import {
+  DataTableModule, SharedModule, AccordionModule,
+  MenuItem, DialogModule, ButtonModule
+  ,SelectButtonModule
+} from 'primeng/primeng';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
     AppComponent,
+   
 
     truncateTextPipe,
 
@@ -41,6 +53,9 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
     CompaniesComponent,
     CompanyDetail,
     
+   
+    caricoPrimeMode,
+
     tipiCamionComponent,
     tipicamionDetailComponent,
 
@@ -51,13 +66,16 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    ButtonModule,
+    SelectButtonModule,
     ///per le message a cascata
     ///https://github.com/akserg/ng2-toasty
     ToastyModule.forRoot(),
     BootstrapModalModule,
-
+    DataTableModule, SharedModule, DialogModule,
     //per lo scroll
     ScrollToModule.forRoot(),
     RouterModule.forRoot([
@@ -75,6 +93,10 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
         component: CompaniesComponent,
       },
 
+      {
+        path: 'carichiPrime',
+        component: caricoPrimeMode,
+      },
       {
         path: 'carichi',
         component: CarichiComponent,

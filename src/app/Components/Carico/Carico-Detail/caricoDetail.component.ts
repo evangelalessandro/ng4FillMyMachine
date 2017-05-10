@@ -21,15 +21,13 @@ export class caricoDetail extends masterDetail_DetailComponent<caricoModel>{
     logMessage: string;
 
     source: geoModel;
-
+    destination: geoModel;
 
     ngOnInit() {
 
-        console.log(" item " + this.item);
-
-        console.log(" item source " + this.item.source);
 
         this.source = this.item.source;
+        this.destination = this.item.destination;
 
     }
 
@@ -71,28 +69,42 @@ export class caricoDetail extends masterDetail_DetailComponent<caricoModel>{
             });
     }
 
-    getAddress(place: Object) {
+    getAddress(place: Object, source: boolean = false) {
+
         var adr_address = place['adr_address'];
         var n = adr_address.indexOf("country-name");
-         
-        
+
+
         if (n > 0) {
             adr_address = adr_address.substr(n + 14);
 
-           // console.log(adr_address);
+            // console.log(adr_address);
             n = adr_address.indexOf("</span>");
-            
-            this.item.source.nation = adr_address.substr(0, n);
-           
-            this.item.source.city = place['formatted_address'];
 
+            var nation = adr_address.substr(0, n);
+
+            var localita = place['formatted_address'];
             var location = place['geometry']['location'];
             //this.model.destinazione.location = location;
             //this.item.destination.nation = place['country'];
             var lat = location.lat();
             var lng = location.lng();
-            this.item.source.lat = lat;
-            this.item.source.lng = lng;
+
+            let dest: any;
+           
+            if (source == false) {
+                dest = this.item.source;
+                this.item.sourceCity = localita;
+            }
+            else {
+                dest = this.item.destination;
+                this.item.destinationCity  = localita;
+            }
+            dest.nation = nation;
+            dest.city = localita;
+            dest.lat = lat;
+            dest.lng = lng;
+            
         }
 
         this.logMessage = JSON.stringify(this.item);

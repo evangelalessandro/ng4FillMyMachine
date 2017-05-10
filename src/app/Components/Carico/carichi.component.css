@@ -25,7 +25,33 @@ body {
   align-items: center;
   padding: 1em 0;
 }
+   
 
+ .price-panel,
+ .price-panel>.panel-heading {
+   -webkit-transition: all .3s ease;
+   -moz-transition: all .3s ease;
+   -o-transition: all .3s ease;
+   transition: all .3s ease;
+ }
+
+ .price-panel:hover {
+   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+ }
+
+ .price-panel:hover>.panel-heading {
+   box-shadow: 0 0 30px rgba(0, 0, 0, .2) inset;
+ }
+
+ .price-panel>.panel-heading {
+   color: white;
+   text-shadow: 0 3px 0 rgba(50, 50, 50, .6);
+   border-radius: 0;
+   box-shadow: 0 5px 0 rgba(50, 50, 50, .2) inset;
+ }
+
+
+   
 .box-header h3 {
     
   text-align: center;

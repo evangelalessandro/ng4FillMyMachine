@@ -1,18 +1,21 @@
 import { baseModel } from './baseModel';
+import { Injectable,Inject } from '@angular/core';
 
+@Injectable()
 export class caricoModel extends baseModel {
-    
-    constructor()
-    {
+
+    constructor() {
         super();
-        
+
         this.source = new geoModel();
+        this.destination = new geoModel();
+        
     }
     name: string;
     note: string;
     mobile1: string;
     email: string;
-   
+
     //metri cubi
     mc3: number;
     //metri di camion
@@ -21,25 +24,20 @@ export class caricoModel extends baseModel {
     kg: number;
     //tipo camion
     idtipocamion: any;
- 
+
     source: geoModel;
-   
 
-    destination: {
-        nation: string;
-        city: string;
 
-        lng: number,
-        lat: number
-    };
+    destination: geoModel;
 
     idCompany: any;
-    
+    destinationCity: string;    
+    sourceCity: string;    
 }
-export class geoModel
-{
+@Injectable()
+export class geoModel {
     nation: string;
     city: string;
     lng: number;
     lat: number;
- }
+}

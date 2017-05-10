@@ -1,10 +1,11 @@
+
 <div *ngIf="item">
   <form class="well" #myCurrentForm="ngForm">
     <div class="form-group row">
       <label for="name" class="col-lg-2 col-form-label-lg">Nome</label>
       <div class="form-group col-lg-4">
         <input type="text" id="name" [(ngModel)]="item.name" name="name"
-         class="form-control" placeholder="Nome...">
+         class="form-control" placeholder="Nome..." required>
       </div>
 
       <label for="IdMobile1" class="col-lg-2 col-form-label-lg">Mobile 1</label>
@@ -16,16 +17,36 @@
       <label for="cittasorgente" class="col-lg-2 col-form-label">Città di carico</label>
       <div class="form-group col-lg-3">
         <input type="text" id="cittasorgente" [(ngModel)]="source.city"
-         class="form-control" name="city" placeholder="Città di carico" (setAddress)="getAddress($event)" googleplace  required>
+         class="form-control" name="city" placeholder="Città di carico" 
+          (setAddress)="getAddress($event,false)" googleplace  required>
       </div>
       <div *ngIf="formErrors.source.city" class="alert alert-danger">
         {{ formErrors.source.city }}
       </div>
       <label for="nationsorgente" class="col-lg-2 col-form-label">Nazione di carico</label>
       <div class="form-group col-lg-3">
-        <input type="text" id="nationsorgente" [(ngModel)]="source.nation" name="nationSource" class="form-control" placeholder="Nazione di carico...">
+        <input type="text" id="nationsorgente" disabled [(ngModel)]="source.nation" name="nationSource" class="form-control" placeholder="Nazione di carico...">
       </div>
     </div>
+
+    <div class="form-group row">
+     <label for="destinationCity" class="col-lg-2 col-form-label">Città di scarico</label>
+      <div class="form-group col-lg-3">
+        <input type="text" id="destinationCity" name="destinationCity" [(ngModel)]="item.destinationCity" 
+          class="form-control" placeholder="Città di scarico"
+          (setAddress)="getAddress($event,true)" googleplace required>
+      </div>
+    <!--   <div *ngIf="formErrors.destinationCity" class="alert alert-danger">
+        {{ formErrors.destinationCity }}
+      </div>
+
+      <label for="nation_destination" class="col-lg-2 col-form-label">Nazione di scarico</label>
+      <div class="form-group col-lg-3">
+        <input type="text" id="nation_destination" [(ngModel)]="destination.nation" name="nation_destination" class="form-control" placeholder="Nazione di scarico...">
+      </div>
+   -->
+    </div>
+
     <div class="form-group row">
       <label for="tipocamion" class="col-lg-2 col-form-label">Tipo camion</label>
       <div class="form-group col-lg-3">
@@ -77,9 +98,9 @@
     </div>
 
 
-    <h2> Dati da selezione {{item | json}}</h2>
+    <!--<h2> Dati da selezione {{item | json}}</h2>-->
   </form>
   <hr>
-  <h1> {{logMessage}}</h1>
+  <!-- {{logMessage}}</h1>-->
   <hr>
 </div>

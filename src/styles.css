@@ -2,7 +2,7 @@
 
 /*questo è per le message a schermo del compoennte ng2-tasty*/
 @import 'style-bootstrap.css'; 
-
+@import '~font-awesome/css/font-awesome.css';
 
 
 .ng-invalid:not(form)  {
